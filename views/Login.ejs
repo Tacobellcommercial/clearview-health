@@ -1,0 +1,55 @@
+<%- include("Header") -%>
+
+<div class="register" method="post" action="/register">
+  <div id="introduction-register">
+    <p><%=errorMessage%></p>
+    <h1>Are you logging in as...</h1>
+    <button id="doctor-button-login"><i class="fa-solid fa-notes-medical"></i> A doctor</button>
+    <button id="patient-button-login"><i class="fa-solid fa-user"></i> A patient</button>
+  </div>
+
+  <form method="post" action="/doctor-login" id="doctor-form-login" style="display: none">
+    <h2>Username...</h2>
+    <input placeholder="Login with username here..." type="text" />
+    <h2>Password</h2>
+    <input placeholder="Password..." type="password" />
+  </form>
+
+  <form  method="post" action="/patient-login" id="patient-form-login" style="display: none">
+      <h2>Username...</h2>
+      <input placeholder="Login with username here..." type="text" name="username"/>
+      <h2>Password</h2>
+      <input placeholder="Password..." type="password" name="password"/>
+
+      <button class="submit-information" type="submit">Sign Up</button>
+  </form>
+</div>
+
+<script>
+
+  const introductionRegister = document.getElementById("introduction-register")
+
+  const doctorButton = document.getElementById("doctor-button-login")
+  const patientButton = document.getElementById("patient-button-login")
+
+  const doctorForm = document.getElementById("doctor-form-login")
+  const patientForm = document.getElementById("patient-form-login")
+
+  doctorButton.addEventListener("click", (event)=>{
+    event.preventDefault();
+
+    doctorForm.style.display = "block";
+    patientForm.style.display = "none";
+    introductionRegister.style.display = "none";
+  })
+
+  patientButton.addEventListener("click", (event)=>{
+    event.preventDefault();
+    patientForm.style.display = "block";
+    doctorForm.style.display = "none";
+    introductionRegister.style.display = "none";
+
+  })
+</script>
+
+<%- include("Footer") -%>

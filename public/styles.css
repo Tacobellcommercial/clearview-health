@@ -4,10 +4,25 @@
   font-size: 3.5rem;
   transition: 0.25s color;
   margin-left: 1.5rem;
+  color: white;
 }
 
 .navbar-brand i:hover{
   color: red;
+}
+
+.navbar{
+  background-color: #4285F4;
+}
+
+.navbar-nav{
+  margin-left: auto;
+  margin-right: 7%;
+  font-family: "Montserrat", sans-serif;
+}
+
+.navbar-nav a{
+  color: white;
 }
 
 
@@ -15,4 +30,49 @@
 /*LANDING PAGE */
 .lph{
   padding: 7% 15%;
+}
+
+
+
+/* Sign Up*/
+
+
+.register {
+  background: linear-gradient(257deg, #57caff, #5787ff);
+  background-size: 400% 400%;
+
+  -webkit-animation: AnimationName 12s ease infinite;
+  -moz-animation: AnimationName 12s ease infinite;
+  animation: AnimationName 12s ease infinite;
+
+  width: 30rem;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2%;
+  margin-top: 2.5rem;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 68%}
+    50%{background-position:100% 33%}
+    100%{background-position:0% 68%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 68%}
+    50%{background-position:100% 33%}
+    100%{background-position:0% 68%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 68%}
+    50%{background-position:100% 33%}
+    100%{background-position:0% 68%}
+}
+
+
+
+@media (max-width: 580px){
+  .register{
+    width: 90%;
+  }
 }

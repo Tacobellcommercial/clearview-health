@@ -1,0 +1,59 @@
+<%- include("Header") -%>
+
+<div class="register" method="post" action="/register">
+  <div id="introduction-register">
+    <p><%=errorMessage%></p>
+    <p><%=successMessage%></p>
+    <h1>Are you signing up as...</h1>
+    <button id="doctor-button-register"><i class="fa-solid fa-notes-medical"></i> A doctor</button>
+    <button id="patient-button-register"><i class="fa-solid fa-user"></i> A patient</button>
+  </div>
+
+  <form method="post" action="/doctor-sign-up" id="doctor-form-register" style="display: none">
+    <h2>First name...</h2>
+    <input placeholder="First name here..." type="text" />
+    <h2>Upload credentials</h2>
+    <input type="file" />
+  </form>
+
+  <form  method="post" action="/patient-sign-up" id="patient-form-register" style="display: none">
+      <h2>First Name</h2>
+      <input placeholder="First name here..." type="text" name="fName"/>
+      <h2>Last Name</h2>
+      <input placeholder="Last name here..." type="text" name="lName"/>
+      <h2>Username</h2>
+      <input placeholder="You'll sign in with this..." type="text" name="username"/>
+      <h2>Password</h2>
+      <input placeholder="Password..." type="password" name="password"/>
+      <button class="submit-information" type="submit">Sign Up</button>
+  </form>
+</div>
+
+<script>
+
+  const introductionRegister = document.getElementById("introduction-register")
+
+  const doctorButton = document.getElementById("doctor-button-register")
+  const patientButton = document.getElementById("patient-button-register")
+
+  const doctorForm = document.getElementById("doctor-form-register")
+  const patientForm = document.getElementById("patient-form-register")
+
+  doctorButton.addEventListener("click", (event)=>{
+    event.preventDefault();
+
+    doctorForm.style.display = "block";
+    patientForm.style.display = "none";
+    introductionRegister.style.display = "none";
+  })
+
+  patientButton.addEventListener("click", (event)=>{
+    event.preventDefault();
+    patientForm.style.display = "block";
+    doctorForm.style.display = "none";
+    introductionRegister.style.display = "none";
+
+  })
+</script>
+
+<%- include("Footer") -%>
