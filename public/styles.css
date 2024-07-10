@@ -30,8 +30,31 @@
 /*LANDING PAGE */
 .lph{
   padding: 7% 15%;
+  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("images/landing-page-header-image.jpg");
+  background-size: cover;
+  background-position: bottom;
 }
 
+.lph h1{
+  color: white;
+  font-family: "Montserrat";
+  font-weight: bolder;
+  font-size: 2.75rem;
+  transition: 0.5s all;
+}
+
+.title-up-effect{
+  padding-top: 5%;
+  opacity: 0;
+}
+
+.lph p{
+  color: white;
+  font-family: "Roboto Mono", sans-serif;
+  margin-top: 2rem;
+  transition: 1s all;
+  font-size: 1rem;
+}
 
 
 /* Sign Up*/

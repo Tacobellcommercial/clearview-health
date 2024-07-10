@@ -2,8 +2,19 @@
 
 <div class="lph">
     <!--Empower your health journey  -->
-    <h1>Bridging the Gap in Healthcare</h1>
-    <p>Clearview Health: Your health data, at your fingertips</p>
+    <h1 class="title-up-effect">Bridging the Gap in Healthcare</h1>
+    <p class="title-up-effect">Clearview Health: Your health data, at your fingertips</p>
+    <div class="buttons">
+
+    </div>
 </div>
 
+<script>
+  const header = document.querySelector(".lph h1");
+  const subtitle = document.querySelector(".lph p");
+  setTimeout(()=>{
+    header.classList.remove("title-up-effect");
+    subtitle.classList.remove("title-up-effect");
+  }, 250)
+</script>
 <%- include("Footer") -%>

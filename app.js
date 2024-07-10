@@ -15,7 +15,8 @@ const patientSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
   username: String,
-  password: String
+  password: String,
+  authority: String
 })
 
 const Patient = mongoose.model("Patient", patientSchema)
@@ -24,7 +25,8 @@ const doctorSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
   username: String,
-  password: String
+  password: String,
+  authority: String
 })
 
 const Doctor = mongoose.model("Doctor", doctorSchema);
@@ -116,7 +118,8 @@ app.post("/patient-sign-up", (req, res)=>{
           firstName: req.body.fName,
           lastName: req.body.lName,
           username: req.body.username,
-          password: encryptedPassword
+          password: encryptedPassword,
+          authority: "Patient"
         })
 
         newPatient.save((err, result)=>{
