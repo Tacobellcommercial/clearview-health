@@ -29,7 +29,7 @@
 
 /*LANDING PAGE */
 .lph{
-  padding: 7% 15%;
+  padding: 15% 18%;
   background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("images/landing-page-header-image.jpg");
   background-size: cover;
   background-position: bottom;
@@ -40,7 +40,8 @@
   font-family: "Montserrat";
   font-weight: bolder;
   font-size: 2.75rem;
-  transition: 0.5s all;
+  transition: 1s all;
+  width: 58%;
 }
 
 .title-up-effect{
@@ -54,8 +55,146 @@
   margin-top: 2rem;
   transition: 1s all;
   font-size: 1rem;
+  width: 58%;
 }
 
+.lph .buttons{
+  margin-top: 2rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bolder;
+}
+
+@media (max-width: 1450px){
+
+  .lph{
+    text-align: center;
+  }
+
+  .lph h1, .lph p{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .lph h1{
+    width: 70%;
+    font-size: 2.5rem;
+  }
+
+  .lph p{
+    width: 70%;
+  }
+}
+
+@media (max-width: 1200px){
+  .lph h1, .lph p{
+    width: 30rem;
+  }
+}
+
+@media (max-width: 750px){
+
+  .lph{
+    padding: 15% 5%;
+  }
+
+  .lph h1, .lph p{
+    width: 100%;
+  }
+
+  .lph h1{
+    font-size: 2.25rem;
+  }
+}
+
+@media (max-width: 550px){
+  .lph{
+    padding: 7% 2.5%;
+  }
+
+  .lph h1{
+    font-size: 1.85rem;
+    width: 90%;
+  }
+
+  .lph p{
+    font-family: "Roboto", sans-serif;
+  }
+}
+
+.skills{
+  padding: 7% 5%;
+  text-align: center;
+}
+
+.skill-container{
+  display: inline-table;
+  width: 30%;
+  padding: 2%;
+  transition: opacity 1s ease-in-out;
+}
+
+.skill-container-opacity{
+  opacity: 0;
+}
+
+.skill-container i{
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.skill-container h2{
+  font-size: 2.25rem;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 1.5rem;
+}
+
+.skill-container p{
+  font-family: "Ubuntu", sans-serif;
+  color: gray;
+}
+
+@media (max-width: 1660px){
+  .skills{
+    padding: 7% 0%;
+  }
+}
+
+@media (max-width: 1500px){
+  .skills h2{
+    font-size: 1.85rem;
+  }
+}
+
+@media (max-width: 1230px){
+  .skill-container{
+    width: 28rem;
+    padding: 0%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 450px){
+  .skill-container{
+    width: 90%;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/*lph HOW IT WORKS*/
+
+.how-it-works{
+  padding: 2% 0% 10% 0%;
+  text-align: center;
+  background-color: #4285F4;
+  color: white;
+}
+
+.how-it-works h1{
+  padding: 0;
+}
 
 /* Sign Up*/
 

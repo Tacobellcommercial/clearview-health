@@ -11,27 +11,14 @@ const app = express();
 
 mongoose.connect("mongodb+srv://tacobellcommercial:"+process.env.PASSWORD+"@cluster0.0zda3uf.mongodb.net/")
 
-const patientSchema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  username: String,
-  password: String,
-  authority: String
-})
+const Patient = require("./models/Patient")
+const Doctor = require("./models/Doctor")
 
-const Patient = mongoose.model("Patient", patientSchema)
+const patientStrategy = require("./strategies/patientStrategy");
+const doctorStrategy = require("./strategies/doctorStrategy");
 
-const doctorSchema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  username: String,
-  password: String,
-  authority: String
-})
-
-const Doctor = mongoose.model("Doctor", doctorSchema);
-
-
+const patientSignupRouter = require("./routes/patientSignup");
+const patientLoginRouter = require("./routes/patientLogin");
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine", "ejs")
@@ -45,29 +32,9 @@ app.use(session({
 
 app.use(passport.authenticate("session"));
 
-const patientStrategy = new LocalStrategy((username, password, callback)=>{
-  Patient.find({username: username}, (err, arrayOfDocuments)=>{
-    if (err){return callback(err)}
-    if (arrayOfDocuments.length === 0){return callback(null, false, {message: "Patient not found..."})}
-
-    const userObject = arrayOfDocuments[0]
-    bcrypt.compare(password, userObject.password, (err, result)=>{
-      if (result == true){
-        return callback(null, userObject)
-      }else{
-        return callback(null, false, {message: "Incorrect password..."})
-      }
-    })
-
-  })
-});
-
-// const doctorStrategy = new LocalStrategy((username, password, callback)=>{
-//
-// });
 
 passport.use("patientStrategy", patientStrategy);
-// passport.use(doctorStrategy);
+passport.use("doctorStrategy", doctorStrategy);
 
 passport.serializeUser((user, callback)=>{
   process.nextTick(()=>{
@@ -81,6 +48,9 @@ passport.deserializeUser((user, callback)=>{
   })
 })
 
+app.use("/patient-sign-up", patientSignupRouter); /*POST*/
+
+app.use("/patient-login", patientLoginRouter); /*POST*/
 
 app.get("/", (req, res)=>{
   res.render("LandingPage", {
@@ -110,52 +80,6 @@ app.get("/register", (req, res)=>{
   })
 })
 
-app.post("/patient-sign-up", (req, res)=>{
-  Patient.find({"username": req.body.username}, (err, arrayOfDocuments)=>{
-    if (arrayOfDocuments.length == 0){
-      bcrypt.hash(req.body.password, 10, (err, encryptedPassword)=>{
-        const newPatient = new Patient({
-          firstName: req.body.fName,
-          lastName: req.body.lName,
-          username: req.body.username,
-          password: encryptedPassword,
-          authority: "Patient"
-        })
-
-        newPatient.save((err, result)=>{
-          res.render("Register", {
-            title: "Register | Clearview Health",
-            errorMessage: "",
-            successMessage: "Successfully signed up!"
-          })
-        })
-      })
-    }else{
-      res.render("Register", {
-        title: "Register | Clearview Health",
-        errorMessage: "Username already taken...",
-        successMessage: ""
-      })
-    }
-  })
-})
-
-app.post("/patient-login", (req, res, next) => {
-  passport.authenticate("patientStrategy", (err, user, info)=>{
-    if (!user){
-      res.render("Login", {
-        title: "Login | Clearview Health",
-        errorMessage: "Wrong username/password...",
-        successMessage: ""
-      })
-    }else{
-      req.logIn(user, (err)=>{
-        console.log(user);
-        res.redirect("/home");
-      })
-    }
-  })(req, res, next);
-});
 
 app.listen(3000, ()=>{
   console.log("Listening on port 3000");

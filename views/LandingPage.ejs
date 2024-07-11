@@ -3,10 +3,36 @@
 <div class="lph">
     <!--Empower your health journey  -->
     <h1 class="title-up-effect">Bridging the Gap in Healthcare</h1>
-    <p class="title-up-effect">Clearview Health: Your health data, at your fingertips</p>
+    <p class="title-up-effect">Clearview Health: Your health data, at your fingertips. We make doctor to patient interaction easy, especially for elders.</p>
     <div class="buttons">
-
+      <a class="btn btn-primary" href="/about">About</a>
+      <a class="btn btn-outline-primary" href="/register">Get Started</a>
     </div>
+</div>
+
+<div class="skills">
+
+    <div class="skill-container skill-container-opacity">
+        <i class="fa-solid fa-handshake"></i>
+        <h2>Easy Interaction</h2>
+        <p>We make it easy for doctors to interact with patients by creating a user-friendly platform</p>
+    </div>
+
+    <div class="skill-container skill-container-opacity">
+        <i class="fa-solid fa-download"></i>
+        <h2>Enhanced Workflows</h2>
+        <p>We empower doctors to work smarter, not harder, by streamlining workflows and boosting productivity.</p>
+    </div>
+
+    <div class="skill-container skill-container-opacity">
+        <i class="fa-solid fa-shield-halved"></i>
+        <h2>Personalized Care</h2>
+        <p>We tailor the experience to individual needs, increasing stronger doctor-patient relationships.</p>
+    </div>
+</div>
+
+<div class="how-it-works">
+    <h1>How it Works</h1>
 </div>
 
 <script>
@@ -16,5 +42,18 @@
     header.classList.remove("title-up-effect");
     subtitle.classList.remove("title-up-effect");
   }, 250)
+
+  const skillContainers = document.querySelectorAll(".skill-container")
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if (entry.isIntersecting){
+        entry.target.classList.remove("skill-container-opacity")
+      }
+    })
+  })
+
+  skillContainers.forEach(e=>{
+    observer.observe(e);
+  })
 </script>
 <%- include("Footer") -%>
