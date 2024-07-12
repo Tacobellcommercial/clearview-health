@@ -338,6 +338,26 @@
 
 .cta{
   padding: 7%;
+  text-align: center;
+}
+
+.cta h1{
+  font-family: "Montserrat", sans-serif;
+  font-weight: bolder;
+  font-size: 3rem;
+  margin-bottom: 1.75rem;
+}
+
+.cta p{
+  font-size: 2rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: bolder;
+  margin-bottom: 1.75rem;
+}
+
+.cta a{
+  font-size: 1.1rem;
+  font-family: "Montserrat", sans-serif;
 }
 
 

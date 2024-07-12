@@ -21,10 +21,22 @@
       <input placeholder="First name here..." type="text" name="fName"/>
       <h2>Last Name</h2>
       <input placeholder="Last name here..." type="text" name="lName"/>
+      <h2>Email</h2>
+      <input placeholder="Email here..." type="email" name="email" required/>
+      <h2>Date of Birth</h2>
+      <input type="date" name="date_of_birth" required />
+      <h2>Biological Sex</h2>
+      <select name="biological_sex">
+        <option value="">Select Sex</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+
+      </select>
       <h2>Username</h2>
       <input placeholder="You'll sign in with this..." type="text" name="username"/>
       <h2>Password</h2>
       <input placeholder="Password..." type="password" name="password"/>
+      <p>Information put here is only shared with doctors you confirm!</p>
       <button class="submit-information" type="submit">Sign Up</button>
   </form>
 </div>
