@@ -186,15 +186,160 @@
 /*lph HOW IT WORKS*/
 
 .how-it-works{
-  padding: 2% 0% 10% 0%;
+  padding: 2% 0% 5% 0%;
   text-align: center;
   background-color: #4285F4;
   color: white;
 }
 
 .how-it-works h1{
-  padding: 0;
+  padding: 1%;
+  font-size: 2.75rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bolder;
 }
+
+
+.section-right, .section-left{
+  width: 70rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+/*COLOR CODED*/
+
+/* .section-right i, .section-left i{
+  background-color: orange;
+}
+
+.text-content{
+  background-color: yellow;
+}
+
+.section-right, .section-left{
+  background-color: pink;
+} */
+/*COLOR CODED*/
+
+
+.step-content{
+  display: flex;
+  align-items: center;
+}
+
+.section-right i{
+  font-size: 4rem;
+  margin-right: 5%;
+}
+
+.section-left i{
+  font-size: 4rem;
+  /* margin-left: 5%; SPACING TOO MUCH*/
+}
+
+.mobile-icon{
+  display: none !important;
+}
+
+
+.text-content{
+  text-align: left;
+  width: 70%;
+  /* display: inline-table; works either way??*/
+}
+
+.section-left .text-content{
+  margin-left: auto;
+}
+
+.text-content h2{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 2rem;
+  font-weight: normal;
+}
+
+.text-content p{
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.25rem;
+  font-weight: bolder;
+}
+
+@media (max-width: 1350px){
+
+  .section-left, .section-right{
+    width: 70%;
+  }
+
+  /* .step-content{
+    width: 70%;
+  } */
+
+  .text-content{
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .comp-icon{
+    display: none !important;
+  }
+
+  .mobile-icon{
+    display: inline-block !important;
+  }
+
+  .section-left i{
+    margin-right: 5%;
+  }
+}
+
+@media (max-width: 1050px){
+  .section-left, .section-right{
+    width: 90%;
+  }
+}
+
+@media (max-width: 800px){
+
+  .step-content{
+    display: block;
+    margin: 2%;
+  }
+
+  .step-content i{
+    margin-bottom: 1rem;
+  }
+
+  .text-content{
+    text-align: center !important;
+  }
+
+  .text-content h2{
+    font-weight: bolder;
+    font-family: "Ubuntu", sans-serif;
+  }
+}
+
+@media (max-width: 500px){
+  .text-content p{
+    font-size: 1rem;
+    font-weight: norma;
+  }
+
+  .step-content i{
+    font-size: 3rem;
+  }
+}
+
+
+/*LPH Call to Action*/
+
+.cta{
+  padding: 7%;
+}
+
 
 /* Sign Up*/
 
