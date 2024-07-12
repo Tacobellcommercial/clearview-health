@@ -557,6 +557,11 @@ NOT IN USE NOT IN USE NOT IN USE
   font-family: "Roboto Mono", sans-serif;
 }
 
+.doctor-bubble i{
+  font-size: 1.5rem;
+  padding: 1%;
+}
+
 
 /*DOCTOR HOME*/
 

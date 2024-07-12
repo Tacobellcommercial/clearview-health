@@ -34,7 +34,7 @@ router.get("/:keyword", (req, res)=>{
     })
 
     if (req.isAuthenticated()){
-      if (req.user.authority == "patient"){
+      if (req.user.authority == "Patient"){
         res.render("DoctorLookup", {
           title: "Doctor Lookup | Clearview Health",
           doctor: false,

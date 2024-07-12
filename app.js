@@ -106,14 +106,30 @@ app.post("/doctor-search", (req, res)=>{
   res.redirect("/doctor-search/" + keyword);
 })
 
+app.get("/doctor-profile/:id", (req, res)=>{
+  const id = req.params.id;
 
-
-
-
-
-
-
-
+  Doctor.findOne({_id: id}, (err, result)=>{
+    if (!result){
+      console.log("Error...")
+      res.redirect("/home");
+    }else if (result){
+      if (req.isAuthenticated()){
+        res.render("DoctorProfile", {
+          title: "Doctor Profile | Clearview Health",
+          doctor: req.authority == "Doctor",
+          patient: req.authority == "Patient"
+        })
+      }else{
+        res.render("DoctorProfile", {
+          title: "Doctor Profile | Clearview Health",
+          doctor: false,
+          patient: false
+        })
+      }
+    }
+  })
+})
 
 
 app.get("/login", (req, res)=>{
