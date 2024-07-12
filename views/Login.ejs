@@ -3,25 +3,27 @@
 <div class="register" method="post" action="/register">
   <div id="introduction-register">
     <p><%=errorMessage%></p>
-    <h1>Are you logging in as...</h1>
-    <button id="doctor-button-login"><i class="fa-solid fa-notes-medical"></i> A doctor</button>
-    <button id="patient-button-login"><i class="fa-solid fa-user"></i> A patient</button>
+    <h1>Are you <span style="text-decoration: underline">logging</span> in as...</h1>
+    <button class="btn btn-danger" id="doctor-button-login"><i class="fa-solid fa-notes-medical"></i> A doctor</button>
+    <button class="btn btn-primary" id="patient-button-login"><i class="fa-solid fa-user"></i> A patient</button>
   </div>
 
-  <form method="post" action="/doctor-login" id="doctor-form-login" style="display: none">
-    <h2>Username...</h2>
-    <input placeholder="Login with username here..." type="text" />
+  <form method="post" action="/doctor-login" class="form-login" id="doctor-form-login" style="display: none">
+    <h1>Hello <span style="color: #f23f48">doctor</span></h1>
+    <h2>Email...</h2>
+    <input placeholder="Login with email here..." type="text" name="username"/>
     <h2>Password</h2>
-    <input placeholder="Password..." type="password" />
+    <input placeholder="Password..." type="password" name="password"/>
+    <button class="submit-information btn btn-outline-light" type="submit">Login</button>
   </form>
 
-  <form  method="post" action="/patient-login" id="patient-form-login" style="display: none">
-      <h2>Username...</h2>
+  <form  method="post" action="/patient-login" class="form-login" id="patient-form-login" style="display: none">
+      <h1>Hello valued patient</h1>
+      <h2>Email...</h2>
       <input placeholder="Login with username here..." type="text" name="username"/>
       <h2>Password</h2>
       <input placeholder="Password..." type="password" name="password"/>
-
-      <button class="submit-information" type="submit">Login</button>
+      <button class="submit-information btn btn-outline-light" type="submit">Login</button>
   </form>
 </div>
 

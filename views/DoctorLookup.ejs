@@ -1,0 +1,14 @@
+<%- include ("Header") -%>
+<div class="doctor-lookup">
+    <h1>Doctor Lookup</h1>
+    <h2>Results: <%=relevantDoctors.length%></h2>
+    <%relevantDoctors.forEach(doctorObject=>{%>
+        <div class="doctor-bubble">
+            <h2><%=doctorObject.firstName%> <%=doctorObject.lastName%></h2>
+            <p><%=doctorObject.practiceName%></p>
+            <p><%=doctorObject._id%></p>
+            <a href="/doctor-profile/<%=doctorObject._id%>"><i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    <%})%>
+</div>
+<%- include ("Footer") -%>

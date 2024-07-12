@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 const doctorSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
-  username: String,
+  licenseNumber: String,
+  practiceName: String,
+  phoneNumber: String,
+  patientList: [],
+  username: String, /*email*/
   password: String,
   authority: String
 })

@@ -1,0 +1,12 @@
+<%- include("Header") -%>
+
+<div class="doctor-home">
+    <h1>Welcome, Doctor</h1>
+    <p><%=firstName%> <%=lastName%></p>
+    <%if (patientList.length == 0){%>
+        <h1>No patients yet...</h1>
+    <%}%>
+    <h1>Patient list here coming soon</h1>
+</div>
+
+<%- include("Footer") -%>

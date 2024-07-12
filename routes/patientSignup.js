@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const router = express.Router();
 
 const Patient = require("../models/Patient.js")
@@ -10,25 +11,19 @@ router.post("/", (req, res)=>{
         const newPatient = new Patient({
           firstName: req.body.fName,
           lastName: req.body.lName,
-          username: req.body.username,
+          dateOfBirth: req.body.date_of_birth,
+          biologicalSex: req.body.biological_sex,
+          username: req.body.username, /*email*/
           password: encryptedPassword,
           authority: "Patient"
         })
 
         newPatient.save((err, result)=>{
-          res.render("Register", {
-            title: "Register | Clearview Health",
-            errorMessage: "",
-            successMessage: "Successfully signed up!"
-          })
+          res.redirect("/login");
         })
       })
     }else{
-      res.render("Register", {
-        title: "Register | Clearview Health",
-        errorMessage: "Username already taken...",
-        successMessage: ""
-      })
+      res.redirect("/register");
     }
   })
 })

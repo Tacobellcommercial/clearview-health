@@ -4,40 +4,81 @@
   <div id="introduction-register">
     <p><%=errorMessage%></p>
     <p><%=successMessage%></p>
-    <h1>Are you signing up as...</h1>
-    <button id="doctor-button-register"><i class="fa-solid fa-notes-medical"></i> A doctor</button>
-    <button id="patient-button-register"><i class="fa-solid fa-user"></i> A patient</button>
+    <h1>Are you <span style="text-decoration: underline">signing</span> up as...</h1>
+    <button class="btn btn-danger" id="doctor-button-register"><i class="fa-solid fa-notes-medical"></i> A doctor</button>
+    <button class="btn btn-primary" id="patient-button-register"><i class="fa-solid fa-user"></i> A patient</button>
   </div>
 
-  <form method="post" action="/doctor-sign-up" id="doctor-form-register" style="display: none">
-    <h2>First name...</h2>
-    <input placeholder="First name here..." type="text" />
-    <h2>Upload credentials</h2>
-    <input type="file" />
+  <form method="post" action="/doctor-sign-up" class="form-register" id="doctor-form-register" style="display: none">
+    <div class="sbs-1">
+      <h2>First name</h2>
+      <input placeholder="First name here..." type="text" name="fName"/>
+    </div>
+    <div class="sbs-1">
+      <h2>Last name</h2>
+      <input placeholder="Last name here..." type="text" name="lName"/>
+    </div>
+
+    <h2>License Number</h2>
+    <input placeholder="IF TESTING, just put: 0000" type="text" name="licenseNumber"/>
+
+    <hr />
+
+    <div class="sbs-1">
+      <h2>Practice Name</h2>
+      <input placeholder="Practice name here..." type="text" name="practiceName"/>
+    </div>
+
+    <div class="sbs-1">
+      <h2>Phone Number</h2>
+      <input placeholder="To reach your practice..." type="text" name="practicePhoneNumber"/>
+    </div>
+    <hr />
+    <h2>Email</h2>
+    <input placeholder="Email here..." type="email" name="username" required/>
+
+    <h2>Password</h2>
+    <input placeholder="Password here..." type="password" name="password" required/>
+    <hr />
+    <p>Information put here is shared with your patients. Your password is encrypted. Information can be changed anytime.</p>
+    <button class="submit-information btn btn-outline-light" type="submit">Sign Up</button>
   </form>
 
-  <form  method="post" action="/patient-sign-up" id="patient-form-register" style="display: none">
-      <h2>First Name</h2>
-      <input placeholder="First name here..." type="text" name="fName"/>
-      <h2>Last Name</h2>
-      <input placeholder="Last name here..." type="text" name="lName"/>
-      <h2>Email</h2>
-      <input placeholder="Email here..." type="email" name="email" required/>
-      <h2>Date of Birth</h2>
-      <input type="date" name="date_of_birth" required />
-      <h2>Biological Sex</h2>
-      <select name="biological_sex">
-        <option value="">Select Sex</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
+  <form  method="post" action="/patient-sign-up" id="patient-form-register" class="form-register" style="display: none">
+      <div class="sbs-1">
+        <h2>First Name</h2>
+        <input placeholder="First name here..." type="text" name="fName"/>
+      </div>
+      <div class="sbs-1">
+        <h2>Last Name</h2>
+        <input placeholder="Last name here..." type="text" name="lName"/>
+      </div>
 
-      </select>
-      <h2>Username</h2>
-      <input placeholder="You'll sign in with this..." type="text" name="username"/>
+      <hr />
+
+      <div class="sbs-1">
+        <h2>Date of Birth</h2>
+        <input type="date" name="date_of_birth" required />
+      </div>
+      <div class="sbs-1">
+        <h2>Sex</h2>
+        <select name="biological_sex">
+          <option value="">Select Sex</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+
+      <hr />
+
+      <h2>Email</h2>
+      <input placeholder="Email here..." type="email" name="username" required/>
       <h2>Password</h2>
       <input placeholder="Password..." type="password" name="password"/>
+      <hr />
+
       <p>Information put here is only shared with doctors you confirm!</p>
-      <button class="submit-information" type="submit">Sign Up</button>
+      <button class="submit-information btn btn-outline-light" type="submit">Sign Up</button>
   </form>
 </div>
 

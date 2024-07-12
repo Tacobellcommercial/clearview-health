@@ -20,6 +20,12 @@ const doctorStrategy = require("./strategies/doctorStrategy");
 const patientSignupRouter = require("./routes/patientSignup");
 const patientLoginRouter = require("./routes/patientLogin");
 
+const doctorSignupRouter = require("./routes/doctorSignup");
+const doctorLoginRouter = require("./routes/doctorLogin");
+
+const landingPageRouter = require("./routes/landingPage");
+const doctorLookupRouter = require("./routes/doctorLookup");
+
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine", "ejs")
 app.use(express.static("public"));
@@ -38,7 +44,16 @@ passport.use("doctorStrategy", doctorStrategy);
 
 passport.serializeUser((user, callback)=>{
   process.nextTick(()=>{
-    callback(null, {id: user._id, username: user.username})
+    callback(null, {
+      id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      licenseNumber: user.licenseNumber,
+      phoneNumber: user.phoneNumber,
+      patientList: user.patientList,
+      username: user.username,
+      authority: user.authority
+    })
   })
 })
 
@@ -49,34 +64,88 @@ passport.deserializeUser((user, callback)=>{
 })
 
 app.use("/patient-sign-up", patientSignupRouter); /*POST*/
-
 app.use("/patient-login", patientLoginRouter); /*POST*/
 
-app.get("/", (req, res)=>{
-  res.render("LandingPage", {
-    title: "Landing Page | Clearview Health"
-  });
-})
+app.use("/doctor-sign-up", doctorSignupRouter); /*POST */
+app.use("/doctor-login", doctorLoginRouter); /*POST */
+
+
+app.use("/", landingPageRouter); /*GET*/
 
 app.get("/home", (req, res)=>{
   if (req.isAuthenticated()){
-    /*IF PATIENT THEN*/
-    res.render("PatientHome");
+    if (req.user.authority == "Doctor"){
+      console.log(req.user);
+      console.log(req.user.patientList);
+      res.render("DoctorHome", {
+        title: "Doctor Home | Clearview Health",
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
+        patientList: req.user.patientList,
+        doctor: true,
+        patient: false
+      });
+    }else if (req.user.authority == "Patient"){
+      res.render("PatientHome", {
+        title: "Patient Home | Clearview Health",
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
+        doctor: false,
+        patient: true
+      });
+    }
+  }else{
+    res.redirect("/");
   }
 })
 
+app.use("/doctor-search", doctorLookupRouter) /*GET*/
+
+app.post("/doctor-search", (req, res)=>{
+  const keyword = req.body.keyword
+  res.redirect("/doctor-search/" + keyword);
+})
+
+
+
+
+
+
+
+
+
+
+
 app.get("/login", (req, res)=>{
-  res.render("Login", {
-    title: "Login | Clearview Health",
-    errorMessage: "",
-  });
+  if (!req.isAuthenticated()){
+    res.render("Login", {
+      title: "Login | Clearview Health",
+      doctor: false,
+      patient: false,
+      errorMessage: "",
+    });
+  }else{
+    res.redirect("/home");
+  }
 })
 
 app.get("/register", (req, res)=>{
-  res.render("Register", {
-    title: "Register | Clearview Health",
-    errorMessage: "",
-    successMessage: ""
+  if (!req.isAuthenticated()){
+    res.render("Register", {
+      title: "Register | Clearview Health",
+      doctor: false,
+      patient: false,
+      errorMessage: "",
+      successMessage: ""
+    })
+  }else{
+    res.redirect("/home");
+  }
+})
+
+app.post("/logout", (req, res)=>{
+  req.logout(err=>{
+    res.redirect("/");
   })
 })
 

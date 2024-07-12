@@ -26,6 +26,19 @@
 }
 
 
+.navbar form button{
+  color: white;
+  transition: 0.25s color;
+}
+
+.navbar form button:hover{
+  color: black;
+}
+
+.navbar form input{
+  margin-left: 5% !important;
+  margin-right: 2% !important;
+}
 
 /*LANDING PAGE */
 .lph{
@@ -360,11 +373,32 @@
   font-family: "Montserrat", sans-serif;
 }
 
+/*Log in*/
+
+.form-login{
+  width: 30rem;
+}
+
+.form-login h2{
+  font-family: "Montserrat", sans-serif;
+}
+
+.form-login input{
+  padding: 5px;
+  border: none;
+  outline: none;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.25rem;
+}
+
+.form-login button{
+  margin-top: 2.5rem;
+  display: block;
+}
 
 /* Sign Up*/
 
-
-.register {
+#doctor-form-login, #patient-form-login, #introduction-register, #patient-form-register, #doctor-form-register{
   background: linear-gradient(257deg, #57caff, #5787ff);
   background-size: 400% 400%;
 
@@ -372,13 +406,108 @@
   -moz-animation: AnimationName 12s ease infinite;
   animation: AnimationName 12s ease infinite;
 
-  width: 30rem;
+  margin-left: auto;
+  margin-right: auto;
+
   border-radius: 5px;
   margin-left: auto;
   margin-right: auto;
   padding: 2%;
   margin-top: 2.5rem;
+
+  color: white;
 }
+
+
+#introduction-register{
+  width: 30rem;
+}
+
+#introduction-register button{
+  font-family: "Roboto Mono", sans-serif;
+  padding: 2.5%;
+}
+
+.submit-information{
+  font-family: "Roboto Mono", sans-serif !important;
+}
+
+/*PATIENT FORM */
+.form-register{
+  width: 50rem;
+}
+
+.form-register h2{
+  font-family: "Montserrat", sans-serif;
+}
+
+.form-register input{
+  padding: 5px;
+  border: none;
+  outline: none;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.25rem;
+}
+
+.form-register .sbs-1{
+  display: inline-block;
+  width: 45%;
+}
+
+.form-register .sbs-1 input{
+  width: 90%; /*90% of the 45% of the 50 rem*/
+}
+
+.form-register .sbs-1 select{
+  font-size: 1.25rem;
+  padding: 5px;
+  border: none;
+  outline: none;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.form-register p{
+  font-family: "Roboto Mono", sans-serif;
+}
+
+@media (max-width: 1050px){
+  .form-register{
+    width: 35rem;
+  }
+}
+
+@media (max-width: 650px){
+  .form-register{
+    width: 90%;
+  }
+
+  .form-register h2{
+    font-size: 1.25rem;
+  }
+
+  .form-register input, .form-register .sbs-1 select{
+    font-size: 0.9rem;
+    font-family: "Roboto", sans-serif;
+    padding: 0;
+  }
+
+  .form-register p{
+    font-family: "Roboto", sans-serif;
+    font-size: 0.85rem;
+  }
+}
+
+
+
+/* #patient-form-register .sbs-2{
+  display: inline-table;
+  width: 30%;
+  margin-right: 5%;
+}
+NOT IN USE NOT IN USE NOT IN USE
+#patient-form-register .sbs-2 input{
+  width: 90%;
+} */
 
 @-webkit-keyframes AnimationName {
     0%{background-position:0% 68%}
@@ -403,3 +532,41 @@
     width: 90%;
   }
 }
+
+/*DOCTOR LOOK UP*/
+
+.doctor-lookup{
+  margin-top: 2.5rem;
+  width: 30rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.doctor-bubble{
+  margin-top: 3.5rem;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.doctor-bubble h2{
+  font-family: "Montserrat", sans-serif;
+}
+
+.doctor-bubble p{
+  font-family: "Roboto Mono", sans-serif;
+}
+
+
+/*DOCTOR HOME*/
+
+.doctor-home{
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5%;
+  background-color: gray;
+}
+
+
+/* PATIENT HOME*/
