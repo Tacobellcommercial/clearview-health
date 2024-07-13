@@ -663,7 +663,7 @@ NOT IN USE NOT IN USE NOT IN USE
   margin-top: 2.5rem;
 }
 
-.dh-prescriptions form{
+.add-prescription{
   margin-top: 2.5rem;
   padding: 2%;
   width: 100%;
@@ -672,13 +672,13 @@ NOT IN USE NOT IN USE NOT IN USE
   color: white;
 }
 
-.dh-prescriptions h2{
+.add-prescription h2{
   font-family: "Roboto", sans-serif;
   font-weight: bolder;
   margin-bottom: 2.5rem;
 }
 
-.dh-prescriptions input, .dh-prescriptions select{
+.add-prescription input, .add-prescription select{
   outline: none;
   border: none;
   border-radius: 5px;
@@ -688,18 +688,26 @@ NOT IN USE NOT IN USE NOT IN USE
   font-family: "Ubuntu", sans-serif;
 }
 
-.dh-prescriptions #prescription-amount{
+.add-prescription #prescription-amount{
   width: 15%;
 }
 
-.dh-prescriptions select{
+.add-prescription select{
   border-radius: 5px;
   width: 25%;
+}
+
+.add-prescription button{
+  display: block;
+  margin-top: 1rem;
+  font-family: "Roboto Mono", sans-serif;
 }
 
 .dh-prescriptions h1{
   margin-top: 2.5rem;
 }
+
+
 
 
 /* PATIENT HOME*/

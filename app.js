@@ -128,6 +128,20 @@ app.get("/home", async (req, res)=>{
   }
 })
 
+function authorizedDoctor(doctorObject, stringPatientId){
+  let authorized = false;
+  doctorObject.patientList.forEach(patient=>{
+    if (patient._id.equals(mongoose.Types.ObjectId(stringPatientId))){
+      authorized = true;
+    }
+  })
+  return authorized;
+}
+
+/*PRESCRIPTIONS*/
+/*PRESCRIPTIONS*/
+/*PRESCRIPTIONS*/
+
 app.get("/prescriptions/:userId", async (req, res)=>{
   if (req.isAuthenticated()){
     if (req.user.authority == "Patient"){
@@ -140,12 +154,8 @@ app.get("/prescriptions/:userId", async (req, res)=>{
       }
     }else if (req.user.authority == "Doctor"){
       const doctorObject = await Doctor.findOne({_id: req.user.id});
-      let authorized = false;
-      doctorObject.patientList.forEach(patient=>{
-        if (patient._id.equals(mongoose.Types.ObjectId(req.params.userId))){
-          authorized = true;
-        }
-      })
+
+      let authorized = authorizedDoctor(doctorObject, req.params.userId)
 
       if (authorized){
         const patientObject = await Patient.findOne({_id: req.params.userId})
@@ -156,9 +166,10 @@ app.get("/prescriptions/:userId", async (req, res)=>{
           prescriptionList: patientObject.prescriptionList,
           doctor: true,
           patient: false,
+          patientId: req.params.userId
         });
       }else{
-        res.redirect("/");
+        res.redirect("/home");
       }
     }
   }else{
@@ -166,14 +177,29 @@ app.get("/prescriptions/:userId", async (req, res)=>{
   }
 })
 
-app.post("/add-prescription", (req, res)=>{
+app.post("/add-prescription", async (req, res)=>{
   if (req.isAuthenticated()){
+    if (req.user.authority == "Doctor"){
+      const doctorObject = await Doctor.findOne({_id: req.user.id});
+      let authorized = authorizedDoctor(doctorObject, req.body.patientId);
 
+      if (authorized){
+        const prescriptionObject = {prescritionName: req.body.prescriptionName, prescriptionAmount: req.body.prescriptionAmount, time: req.body.prescriptionTime}
+        await Patient.updateOne({_id: req.body.patientId}, {$push: {prescriptionList: prescriptionObject}})
+        res.redirect("/prescriptions/" + req.body.patientId)
+      }else{
+        res.redirect("/home");
+      }
+    }else{
+      res.redirect("/home");
+    }
   }else{
     res.redirect("/home");
   }
 })
 
+
+/*END OF PRESCRIPTIONS*/
 
 app.post("/doctor-accept-patient", async (req, res)=>{
   const doctorObject = await Doctor.findOne({_id: req.user.id})
