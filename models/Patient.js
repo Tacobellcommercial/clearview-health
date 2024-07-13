@@ -9,6 +9,7 @@ const patientSchema = new mongoose.Schema({
   biologicalSex: String,
   doctorsList: [],
   awaitingDoctors: [],
+  prescriptionList: [],
   username: String,
   password: String,
   authority: String

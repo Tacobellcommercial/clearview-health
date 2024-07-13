@@ -89,7 +89,7 @@ app.use("/doctor-login", doctorLoginRouter); /*POST */
 
 app.use("/", landingPageRouter); /*GET*/
 
-app.get("/home", (req, res)=>{
+app.get("/home", async (req, res)=>{
   if (req.isAuthenticated()){
     if (req.user.authority == "Doctor"){
       function calculateAge(dateString) {
@@ -102,18 +102,17 @@ app.get("/home", (req, res)=>{
           }
           return age;
       }
-      Doctor.findOne({_id: req.user.id}, (err, doctorObject)=>{
-        res.render("DoctorHome", {
-          title: "Doctor Home | Clearview Health",
-          firstName: doctorObject.firstName,
-          lastName: doctorObject.lastName,
-          patientList: doctorObject.patientList,
-          awaitingPatients: doctorObject.awaitingPatients,
-          calculateAge: calculateAge,
-          doctor: true,
-          patient: false
-        });
-      })
+      const doctorObject = await Doctor.findOne({_id: req.user.id})
+      res.render("DoctorHome", {
+        title: "Doctor Home | Clearview Health",
+        firstName: doctorObject.firstName,
+        lastName: doctorObject.lastName,
+        patientList: doctorObject.patientList,
+        awaitingPatients: doctorObject.awaitingPatients,
+        calculateAge: calculateAge,
+        doctor: true,
+        patient: false
+      });
 
     }else if (req.user.authority == "Patient"){
       res.render("PatientHome", {
@@ -129,8 +128,63 @@ app.get("/home", (req, res)=>{
   }
 })
 
-app.post("/doctor-accept-patient", (req, res)=>{
+app.get("/prescriptions/:userId", async (req, res)=>{
+  if (req.isAuthenticated()){
+    if (req.user.authority == "Patient"){
+      if (req.user.id == req.params.userId){
+        res.render("PatientPrescriptions", {
+          title: "Your prescriptions | Clearview Health"
+        })
+      }else{
+        res.redirect("/");
+      }
+    }else if (req.user.authority == "Doctor"){
+      const doctorObject = await Doctor.findOne({_id: req.user.id});
+      let authorized = false;
+      doctorObject.patientList.forEach(patient=>{
+        if (patient._id.equals(mongoose.Types.ObjectId(req.params.userId))){
+          authorized = true;
+        }
+      })
 
+      if (authorized){
+        const patientObject = await Patient.findOne({_id: req.params.userId})
+        console.log("HELKRLOSJFDKLEDFS");
+        console.log(patientObject);
+        res.render("DoctorPrescriptions", {
+          title: "Patient prescriptions | Clearview Health",
+          prescriptionList: patientObject.prescriptionList,
+          doctor: true,
+          patient: false,
+        });
+      }else{
+        res.redirect("/");
+      }
+    }
+  }else{
+    res.redirect("/");
+  }
+})
+
+app.post("/add-prescription", (req, res)=>{
+  if (req.isAuthenticated()){
+
+  }else{
+    res.redirect("/home");
+  }
+})
+
+
+app.post("/doctor-accept-patient", async (req, res)=>{
+  const doctorObject = await Doctor.findOne({_id: req.user.id})
+  const patientObject = await Patient.findOne({_id: req.body.id});
+
+  await Patient.updateOne({_id: req.body.id}, {$pull: {awaitingDoctors: {_id: mongoose.Types.ObjectId(req.user.id)}}});
+  await Patient.updateOne({_id: req.body.id}, {$push: {doctorsList: doctorObject}});
+
+  await Doctor.updateOne({_id: req.user.id}, {$pull: {awaitingPatients: {id: req.body.id}}});
+  await Doctor.updateOne({_id: req.user.id}, {$push: {patientList: patientObject}})
+  res.redirect("/home");
 })
 
 app.post("/doctor-reject-patient", (req, res)=>{

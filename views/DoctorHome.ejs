@@ -32,16 +32,36 @@
             </div>
           </div>
       <%})%>
-      <hr />
+    </div>
+    <hr />
+
+    <div class="dh-patient-list">
+      <%if (patientList.length == 0){%>
+          <h1>No patients yet...</h1>
+      <%}else{%>
+          <p>Patients: <%=patientList.length%></p>
+      <%}%>
+
+      <%patientList.forEach(e=>{%>
+          <div class="dh-patient-object">
+              <div class="interact">
+                <h2><%=e.firstName%> <%=e.lastName%></h2>
+                <a href="prescriptions/<%=e._id%>"class="btn btn-outline-primary"><i class="fa-solid fa-prescription-bottle"></i> Prescriptions</a>
+                <a href="labs/<%=e._id%>"class="btn btn-outline-primary"><i class="fa-solid fa-receipt"></i> Send Labs</a>
+              </div>
+              <div class="information">
+                <p><%=e.phoneNumber%></p>
+                <p><%=e.biologicalSex%></p>
+                <p><%=calculateAge(e.dateOfBirth)%> Years Old</p>
+              </div>
+          </div>
+      <%})%>
     </div>
 
-    <%if (patientList.length == 0){%>
-        <h1>No patients yet...</h1>
-    <%}%>
-    <h1>Finish patient carosel</h1>
+    <hr />
+
     <h1>Finish prescription dashboard</h1>
     <h1>Finish lab results/bloodwork/image upload</h1>
-    <h1>Finish sending requests to accept patients</h1>
 </div>
 
 <%- include("Footer") -%>

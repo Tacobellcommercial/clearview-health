@@ -1,0 +1,28 @@
+<%- include("Header") -%>
+
+<div class="dh-prescriptions">
+
+
+  <form class="add-prescription" method="post" action="/add-prescription">
+    <h2>Add a prescription</h2>
+    <input placeholder="Medication name..."/>
+    <input id="prescription-amount" placeholder="(ex: mg)"/>
+    <select name="prescription-time">
+      <option value="">Select Time</option>
+      <option value="Male">Daily</option>
+      <option value="Female">Weekly</option>
+      <option value="Female">Bi-weekly</option>
+      <option value="Female">Monthly</option>
+      <option value="Female">Other</option>
+      <option value="Female">N/A</option>
+    </select>
+  </form>
+
+  <%if (prescriptionList.length == 0){%>
+      <h1>No prescriptions here...</h1>
+  <%}else{%>
+      <h1>Prescriptions</h1>
+  <%}%>
+</div>
+
+<%- include("Footer") -%>
