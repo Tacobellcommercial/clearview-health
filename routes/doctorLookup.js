@@ -11,7 +11,6 @@ router.get("/:keyword", (req, res)=>{
 
   Doctor.find({}, (err, arrayOfDoctors)=>{
     arrayOfDoctors.forEach(doctorObject=>{
-      console.log(doctorObject);
       if (splitKeyword.length == 1){
         if (keyword == doctorObject.firstName.toLowerCase()){
           relevantDoctors.push(doctorObject)

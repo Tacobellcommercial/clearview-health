@@ -562,16 +562,66 @@ NOT IN USE NOT IN USE NOT IN USE
   padding: 1%;
 }
 
+.doctor-profile{
+  margin-left: auto;
+  margin-right: auto;
+  width: 30rem;
+  background-color: gray;
+}
+
 
 /*DOCTOR HOME*/
 
 .doctor-home{
-  width: 50%;
+  width: 50rem;
   margin-left: auto;
   margin-right: auto;
   padding-top: 5%;
-  background-color: gray;
 }
+
+
+.dh-patient-object{
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.dh-patient-object .accept-deny{
+  width: 60%;
+  padding: 1%;
+  display: inline-table;
+}
+
+.dh-patient-object h2{
+  font-size: 1.5rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: bolder;
+}
+
+.dh-patient-object form{
+  margin-top: 1rem;
+  display: inline-block;
+  position: relative;
+  top: 1.25rem;
+}
+
+.dh-patient-object button{
+  font-family: "Roboto", sans-serif;
+  font-size: 0.85rem;
+  margin-right: 0.5rem;
+}
+
+
+.dh-patient-object .information{
+  width: 30%;
+  display: inline-table;
+}
+
+.dh-patient-object .information p{
+  font-family: "Roboto Mono", sans-serif;
+
+}
+
 
 
 /* PATIENT HOME*/

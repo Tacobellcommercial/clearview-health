@@ -1,3 +1,10 @@
 <%- include("Header") -%>
-
+<form method="post" action="/request-doctor" class="doctor-profile">
+    <h1><%=doctorObject.firstName%> <%=doctorObject.lastName%></h1>
+    <p><%=doctorObject.practiceName%></p>
+    <p><%=doctorObject.phoneNumber%></p>
+    <p>Profile ID: <%=doctorObject._id%></p>
+    <input type="hidden" name="id" value="<%=doctorObject._id%>"/>
+    <button type="submit">Request Doctor</button>
+</form>
 <%- include("Footer") -%>

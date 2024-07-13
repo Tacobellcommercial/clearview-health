@@ -7,6 +7,7 @@ const doctorSchema = new mongoose.Schema({
   practiceName: String,
   phoneNumber: String,
   patientList: [],
+  awaitingPatients: [],
   username: String, /*email*/
   password: String,
   authority: String

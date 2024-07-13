@@ -3,6 +3,38 @@
 <div class="doctor-home">
     <h1>Welcome, Doctor</h1>
     <p><%=firstName%> <%=lastName%></p>
+
+
+    <div class="dh-awaiting-patients">
+      <%if (awaitingPatients.length == 0){ %>
+          <p>No new awaiting patients...</p>
+      <%}else{%>
+          <p>Awaiting patients: <%=awaitingPatients.length%></p>
+          <hr />
+      <%}%>
+      <%awaitingPatients.forEach(e=>{%>
+          <div class="dh-patient-object">
+            <div class="accept-deny">
+              <h2><%=e.firstName%> <%=e.lastName%></h2>
+              <form method="post" action="/doctor-accept-patient">
+                <input type="hidden" value="<%=e.id%>" name="id"/>
+                <button type="submit" class="btn btn-outline-success">Accept</button>
+              </form>
+              <form method="post" action="/doctor-reject-patient">
+                <input type="hidden" value="<%=e.id%>" name="id"/>
+                <button type="submit" class="btn btn-outline-danger">Deny</button>
+              </form>
+            </div>
+            <div class="information">
+              <p><%=e.phoneNumber%></p>
+              <p><%=e.biologicalSex%></p>
+              <p><%=calculateAge(e.dateOfBirth)%> Years Old</p>
+            </div>
+          </div>
+      <%})%>
+      <hr />
+    </div>
+
     <%if (patientList.length == 0){%>
         <h1>No patients yet...</h1>
     <%}%>

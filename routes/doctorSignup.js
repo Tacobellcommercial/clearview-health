@@ -15,6 +15,7 @@ router.post("/", (req, res)=>{
           practiceName: req.body.practiceName,
           phoneNumber: req.body.practicePhoneNumber,
           patientList: [],
+          awaitingPatients: [],
           username: req.body.username,
           password: encryptedPassword,
           authority: "Doctor"

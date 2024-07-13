@@ -25,6 +25,8 @@ const doctorLoginRouter = require("./routes/doctorLogin");
 
 const landingPageRouter = require("./routes/landingPage");
 const doctorLookupRouter = require("./routes/doctorLookup");
+const doctorProfileRouter = require("./routes/doctorProfile");
+const requestDoctorRouter = require("./routes/requestDoctor");
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine", "ejs")
@@ -32,8 +34,8 @@ app.use(express.static("public"));
 
 app.use(session({
   secret: "secret",
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true
 }))
 
 app.use(passport.authenticate("session"));
@@ -43,18 +45,33 @@ passport.use("patientStrategy", patientStrategy);
 passport.use("doctorStrategy", doctorStrategy);
 
 passport.serializeUser((user, callback)=>{
-  process.nextTick(()=>{
-    callback(null, {
-      id: user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      licenseNumber: user.licenseNumber,
-      phoneNumber: user.phoneNumber,
-      patientList: user.patientList,
-      username: user.username,
-      authority: user.authority
+  if (user.authority == "Doctor"){
+    process.nextTick(()=>{
+      callback(null, {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        licenseNumber: user.licenseNumber,
+        phoneNumber: user.phoneNumber,
+        username: user.username,
+        authority: user.authority
+      })
     })
-  })
+  }else{
+    process.nextTick(()=>{
+      callback(null, {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phoneNumber: user.phoneNumber,
+        dateOfBirth: user.dateOfBirth,
+        biologicalSex: user.biologicalSex,
+        username: user.username,
+        authority: user.authority
+      })
+    })
+  }
+
 })
 
 passport.deserializeUser((user, callback)=>{
@@ -75,16 +92,29 @@ app.use("/", landingPageRouter); /*GET*/
 app.get("/home", (req, res)=>{
   if (req.isAuthenticated()){
     if (req.user.authority == "Doctor"){
-      console.log(req.user);
-      console.log(req.user.patientList);
-      res.render("DoctorHome", {
-        title: "Doctor Home | Clearview Health",
-        firstName: req.user.firstName,
-        lastName: req.user.lastName,
-        patientList: req.user.patientList,
-        doctor: true,
-        patient: false
-      });
+      function calculateAge(dateString) {
+          var today = new Date();
+          var birthDate = new Date(dateString);
+          var age = today.getFullYear() - birthDate.getFullYear();
+          var m = today.getMonth() - birthDate.getMonth();
+          if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+              age--;
+          }
+          return age;
+      }
+      Doctor.findOne({_id: req.user.id}, (err, doctorObject)=>{
+        res.render("DoctorHome", {
+          title: "Doctor Home | Clearview Health",
+          firstName: doctorObject.firstName,
+          lastName: doctorObject.lastName,
+          patientList: doctorObject.patientList,
+          awaitingPatients: doctorObject.awaitingPatients,
+          calculateAge: calculateAge,
+          doctor: true,
+          patient: false
+        });
+      })
+
     }else if (req.user.authority == "Patient"){
       res.render("PatientHome", {
         title: "Patient Home | Clearview Health",
@@ -99,6 +129,20 @@ app.get("/home", (req, res)=>{
   }
 })
 
+app.post("/doctor-accept-patient", (req, res)=>{
+
+})
+
+app.post("/doctor-reject-patient", (req, res)=>{
+  Doctor.updateOne({_id: req.user.id}, {$pull: {awaitingPatients: {id: req.body.id}}}, (err, result)=>{
+    Patient.updateOne({_id: req.body.id}, {$pull: {awaitingDoctors: {_id: mongoose.Types.ObjectId(req.user.id)}}}, (err2, result2)=>{
+      res.redirect("/home");
+    })
+  })
+})
+
+
+
 app.use("/doctor-search", doctorLookupRouter) /*GET*/
 
 app.post("/doctor-search", (req, res)=>{
@@ -106,30 +150,9 @@ app.post("/doctor-search", (req, res)=>{
   res.redirect("/doctor-search/" + keyword);
 })
 
-app.get("/doctor-profile/:id", (req, res)=>{
-  const id = req.params.id;
+app.use("/doctor-profile", doctorProfileRouter); /*GET*/
 
-  Doctor.findOne({_id: id}, (err, result)=>{
-    if (!result){
-      console.log("Error...")
-      res.redirect("/home");
-    }else if (result){
-      if (req.isAuthenticated()){
-        res.render("DoctorProfile", {
-          title: "Doctor Profile | Clearview Health",
-          doctor: req.authority == "Doctor",
-          patient: req.authority == "Patient"
-        })
-      }else{
-        res.render("DoctorProfile", {
-          title: "Doctor Profile | Clearview Health",
-          doctor: false,
-          patient: false
-        })
-      }
-    }
-  })
-})
+app.use("/request-doctor", requestDoctorRouter); /*POST*/
 
 
 app.get("/login", (req, res)=>{
