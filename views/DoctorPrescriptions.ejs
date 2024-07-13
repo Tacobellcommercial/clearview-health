@@ -7,7 +7,7 @@
     <h2>Add a prescription</h2>
     <input type="hidden" name="patientId" value="<%=patientId%>"/>
     <input name="prescriptionName" placeholder="Medication name..."/>
-    <input name="prescriptionAmount" id="prescription-amount" placeholder="(ex: mg)"/>
+    <input name="prescriptionAmount" id="prescription-amount" placeholder="(in mg)"/>
     <select name="prescriptionTime">
       <option value="na">Select Time</option>
       <option value="daily">Daily</option>
@@ -22,9 +22,21 @@
   </form>
 
   <%if (prescriptionList.length == 0){%>
-      <h1>No prescriptions here...</h1>
+      <h1>No prescriptions for <%=fullName%></h1>
   <%}else{%>
-      <h1>Prescriptions</h1>
+      <h1>Prescriptions for <%=fullName%></h1>
+      <%prescriptionList.forEach(prescriptionObject=>{%>
+          <div class="dh-prescription-object">
+            <h2><%=prescriptionObject.prescriptionName%></h2>
+            <p>Amount: <%=prescriptionObject.prescriptionAmount%> mg</p>
+            <p>Period: <%=prescriptionObject.time%></p>
+            <form action="/remove-prescription" method="post">
+              <input type="hidden" name="prescriptionId" value="<%=prescriptionObject.prescriptionId%>" />
+              <input type="hidden" name="patientId" value="<%=patientId%>"/>
+              <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-trash"></i> Delete</button>
+            </form>
+          </div>
+      <%})%>
   <%}%>
 </div>
 

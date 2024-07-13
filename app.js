@@ -164,6 +164,7 @@ app.get("/prescriptions/:userId", async (req, res)=>{
         res.render("DoctorPrescriptions", {
           title: "Patient prescriptions | Clearview Health",
           prescriptionList: patientObject.prescriptionList,
+          fullName: patientObject.firstName + " " + patientObject.lastName,
           doctor: true,
           patient: false,
           patientId: req.params.userId
@@ -184,7 +185,7 @@ app.post("/add-prescription", async (req, res)=>{
       let authorized = authorizedDoctor(doctorObject, req.body.patientId);
 
       if (authorized){
-        const prescriptionObject = {prescritionName: req.body.prescriptionName, prescriptionAmount: req.body.prescriptionAmount, time: req.body.prescriptionTime}
+        const prescriptionObject = {prescriptionName: req.body.prescriptionName, prescriptionAmount: req.body.prescriptionAmount, time: req.body.prescriptionTime, prescriptionId: String(Date.now())}
         await Patient.updateOne({_id: req.body.patientId}, {$push: {prescriptionList: prescriptionObject}})
         res.redirect("/prescriptions/" + req.body.patientId)
       }else{
@@ -194,7 +195,26 @@ app.post("/add-prescription", async (req, res)=>{
       res.redirect("/home");
     }
   }else{
-    res.redirect("/home");
+    res.redirect("/");
+  }
+})
+
+app.post("/remove-prescription", async (req, res)=>{
+  if (req.isAuthenticated()){
+    if (req.user.authority == "Doctor"){
+      const doctorObject = await Doctor.findOne({_id: req.user.id});
+      let authorized = authorizedDoctor(doctorObject, req.body.patientId);
+      if (authorized){
+        await Patient.updateOne({_id: req.body.patientId}, {$pull: {prescriptionList: {prescriptionId: req.body.prescriptionId}}})
+        res.redirect("/prescriptions/" + req.body.patientId)
+      }else{
+        res.redirect("/home");
+      }
+    }else{
+      res.redirect("/home");
+    }
+  }else{
+    res.redirect("/");
   }
 })
 

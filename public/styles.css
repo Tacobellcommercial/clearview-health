@@ -705,9 +705,29 @@ NOT IN USE NOT IN USE NOT IN USE
 
 .dh-prescriptions h1{
   margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
+.dh-prescription-object{
+  width: 100%;
+  padding: 1%;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  margin-bottom: 1%;
+}
 
+.dh-prescription-object h2{
+  font-family: "Roboto", sans-serif;
+  font-weight: bolder;
+}
+
+.dh-prescription-object p{
+  font-family: "Roboto Mono", sans-serif;
+
+}
+
+.dh-prescription-object form{
+  display: block;
+}
 
 
 /* PATIENT HOME*/
