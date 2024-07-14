@@ -12,13 +12,15 @@
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "express-session": "^1.18.0",
+    "mongoose": "^8.5.1",
     "multer": "^1.4.5-lts.1",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
+    "session": "^0.1.0",
     "uuid": "^10.0.0"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tacobellcommercial/clearview-health.git"
@@ -27,5 +29,6 @@
     "url": "https://github.com/Tacobellcommercial/clearview-health/issues"
   },
   "homepage": "https://github.com/Tacobellcommercial/clearview-health#readme",
+  "devDependencies": {},
   "description": ""
 }
