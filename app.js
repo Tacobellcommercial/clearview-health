@@ -115,10 +115,14 @@ app.get("/home", async (req, res)=>{
       });
 
     }else if (req.user.authority == "Patient"){
+
+      const patientObject = await Patient.findOne({_id: req.user.id});
       res.render("PatientHome", {
         title: "Patient Home | Clearview Health",
         firstName: req.user.firstName,
         lastName: req.user.lastName,
+        doctorsList: patientObject.doctorsList,
+        awaitingDoctors: patientObject.awaitingDoctors,
         doctor: false,
         patient: true
       });
@@ -220,6 +224,14 @@ app.post("/remove-prescription", async (req, res)=>{
 
 
 /*END OF PRESCRIPTIONS*/
+
+app.post("/doctor-remove-patient", async (req, res)=>{
+  const doctorObject = await Doctor.findOne({_id: req.user.id});
+  const patientObject = await Patient.findOne({_id: req.body.id});
+
+  await Patient.updateOne({_id: patientObject._id}, {$pull: {doctorsList: {_id: doctorObject._id}}});
+  await Doctor.updateOne({_id: doctorObject._id}, {$pull: {patientList: {_id: patientObject._id}}});
+})
 
 app.post("/doctor-accept-patient", async (req, res)=>{
   const doctorObject = await Doctor.findOne({_id: req.user.id})

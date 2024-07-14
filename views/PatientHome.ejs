@@ -3,10 +3,32 @@
 <div class="patient-home">
   <h1>Hello, Patient</h1>
   <p><%=firstName%> <%=lastName%></p>
-  <h1>Finish sending requests to doctors</h1>
-  <h1>Finish doctors list</h1>
-  <h1>Finish prescriptions list</h1>
-  <h1>Finish results dashboard</h1>
+  <hr />
+  <h1>Requested Doctors</h1>
+  <%if (awaitingDoctors.length == 0){%>
+      <p>No doctors requested...</p>
+  <%}%>
+  <hr />
+  <h1 id="patient-your-doctors">Your doctors</h1>
+  <%if (doctorsList.length == 0){%>
+      <p>No doctors found...</p>
+  <%}%>
+  <%doctorsList.forEach(doctorObject=>{%>
+      <div class="ph-doctor-object">
+        <h2><%=doctorObject.firstName%> <%=doctorObject.lastName%></h2>
+        <div class="information">
+          <p><%=doctorObject.practiceName%></p>
+          <p><i class="fa-solid fa-phone"></i>: <%=doctorObject.phoneNumber%></p>
+          <p>ID: <%=doctorObject._id%></p>
+        </div>
+      </div>
+  <%})%>
+  <hr />
+
+  <div class="prescriptions">
+      <h1>Prescriptions</h1>
+  </div>
+
 </div>
 
 <%- include("Footer") -%>

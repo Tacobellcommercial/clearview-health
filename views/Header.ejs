@@ -54,15 +54,22 @@
                 </form>
               </li>
             <%}else if (patient){%>
-              <form class="d-flex" role="search" action="/doctor-search" method="post">
-                <input name="keyword" class="form-control me-2" type="search" placeholder="Search doctor..." aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Search</button>
-              </form>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/home">Dashboard</a>
+              </li>
+
               <li class="nav-item">
                 <form method="post" action="/logout">
                   <button class="nav-link" aria-current="page">Logout</button>
                 </form>
               </li>
+
+              <form class="d-flex" role="search" action="/doctor-search" method="post">
+                <input name="keyword" class="form-control me-2" type="search" placeholder="Search doctor..." aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+              </form>
+
             <%}%>
           </ul>
         </div>
