@@ -4,6 +4,22 @@ body{
   overflow-x: hidden;
 }
 
+.error{
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.error h1{
+  font-family: "Montserrat", sans-serif;
+  font-weight: bolder;
+  font-size: 2.75rem;
+}
+
+.error p{
+  font-family: "Roboto Mono", sans-serif;
+  font-size: 1.5rem;
+}
+
 .navbar-brand i{
   font-size: 3.5rem;
   transition: 0.25s color;
@@ -941,7 +957,7 @@ NOT IN USE NOT IN USE NOT IN USE
   }
 
   .add-prescription select{
-    width: 75%;  
+    width: 75%;
   }
 }
 
@@ -1122,6 +1138,14 @@ NOT IN USE NOT IN USE NOT IN USE
   border-radius: 5px;
   padding: 1%;
   font-family: "Montserrat", sans-serif;
+}
+
+#lab_file{
+  outline: none;
+  padding: 1%;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  font-family: "Roboto", sans-serif;
 }
 
 .dh-labs-form .broader-lab{

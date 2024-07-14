@@ -17,7 +17,7 @@
       <div class="specific-lab" id="bloodwork-details" style="display: none">
         <h2>Bloodwork Details</h2>
         <select id="bloodwork-test" name="bloodworkTest">
-          <option value="">Select Test</option>
+          <option value="N/A">Select Test</option>
           <option value="Complete Blood Count (CBC)">Complete Blood Count (CBC)</option>
           <option value="Comprehensive Metabolic Panel (CMP)">Comprehensive Metabolic Panel (CMP)</option>
         </select>
@@ -26,7 +26,7 @@
       <div class="specific-lab" id="imaging-details" style="display: none">
         <h2>Imaging Details</h2>
         <select id="imaging-type" name="imagingType">
-          <option value="">Select Type</option>
+          <option value="N/A">Select Type</option>
           <option value="X-ray">X-ray</option>
           <option value="CT Scan">CT Scan</option>
           <option value="MRI Scan">MRI</option>
@@ -40,7 +40,7 @@
       </div>
 
       <hr />
-      <input type="file" id="lab_file" name="lab_file"/>
+      <input type="file" id="lab_file" name="lab_file" required/>
       <button type="submit" class="btn btn-outline-light">Add Lab Result</button>
       <input type="hidden" value="<%=userId%>" name="userId"/>
 

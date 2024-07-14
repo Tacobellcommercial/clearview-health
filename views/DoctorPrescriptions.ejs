@@ -6,10 +6,10 @@
   <form class="add-prescription" method="post" action="/add-prescription">
     <h2>Add a prescription</h2>
     <input type="hidden" name="patientId" value="<%=patientId%>"/>
-    <input name="prescriptionName" placeholder="Medication name..."/>
-    <input name="prescriptionAmount" id="prescription-amount" placeholder="(in mg)"/>
-    <select name="prescriptionTime">
-      <option value="na">Select Time</option>
+    <input name="prescriptionName" placeholder="Medication name..." required/>
+    <input name="prescriptionAmount" id="prescription-amount" placeholder="(in mg)" required/>
+    <select name="prescriptionTime" required>
+      <option value="N/A">Select Time</option>
       <option value="daily">Daily</option>
       <option value="weekly">Weekly</option>
       <option value="biweekly">Biweekly</option>

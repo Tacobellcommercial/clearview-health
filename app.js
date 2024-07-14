@@ -386,7 +386,6 @@ app.get("/register", (req, res)=>{
       doctor: false,
       patient: false,
       errorMessage: "",
-      successMessage: ""
     })
   }else{
     res.redirect("/home");
@@ -399,6 +398,21 @@ app.post("/logout", (req, res)=>{
   })
 })
 
+app.all("*", (req, res)=>{
+  if (req.isAuthenticated()){
+    res.render("Error", {
+      title: "Error! | Clearview Health",
+      patient: req.user.authority == "Patient",
+      doctor: req.user.authority == "Doctor"
+    })
+  }else{
+    res.render("Error", {
+      title: "Error! | Clearview Health",
+      patient: false,
+      doctor: false
+    })
+  }
+})
 
 app.listen(3000, ()=>{
   console.log("Listening on port 3000");
