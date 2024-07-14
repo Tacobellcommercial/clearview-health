@@ -1,0 +1,67 @@
+<%- include("Header") -%>
+  <div class="dh-labs">
+    <form method="post" action="/add-lab-results" class="dh-labs-form">
+      <h1>Add lab results</h1>
+
+      <div class="broader-lab">
+        <h2>Lab Result Type</h2>
+        <select id="lab-type" name="labType" required>
+          <option value="">Select Result Type</option>
+          <option value="bloodwork">Bloodwork</option>
+          <option value="imaging">Imaging</option>
+          <option value="pathology">Pathology</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="specific-lab" id="bloodwork-details" style="display: none">
+        <h2>Bloodwork Details</h2>
+        <select id="bloodwork-test" name="bloodworkTest">
+          <option value="">Select Test</option>
+          <option value="cbc">Complete Blood Count (CBC)</option>
+          <option value="cmp">Comprehensive Metabolic Panel (CMP)</option>
+        </select>
+      </div>
+
+      <div class="specific-lab" id="imaging-details" style="display: none">
+        <h2>Imaging Details</h2>
+        <select id="imaging-type" name="imagingType">
+          <option value="">Select Type</option>
+          <option value="xray">X-ray</option>
+          <option value="ct">CT Scan</option>
+          <option value="mri">MRI</option>
+          <option value="ultrasound">Ultrasound</option>
+        </select>
+      </div>
+
+      <hr />
+      <input type="file" id="lab_file" name="lab_file"/>
+      <button type="submit" class="btn btn-outline-light">Add Lab Result</button>
+    </form>
+    <h1>Labs for <%=patientName%></h1>
+  </div>
+
+  <script>
+    const labTypeSelect = document.getElementById("lab-type");
+    const bloodworkDetails = document.getElementById("bloodwork-details");
+    const imagingDetails = document.getElementById("imaging-details");
+
+    labTypeSelect.addEventListener("change", ()=>{
+      const selectedType = labTypeSelect.value;
+
+      if (selectedType == "bloodwork"){
+        bloodworkDetails.style.display = "inline-block";
+        imagingDetails.style.display = "none";
+      }else if (selectedType == "imaging"){
+        imagingDetails.style.display = "inline-block";
+        bloodworkDetails.style.display = "none";
+      }else if (selectedType == "other"){
+        /*make text field visible*/
+      }else if (selectedType == ""){
+        console.log("HELLO?");
+        imagingDetails.style.display = "none";
+        bloodworkDetails.style.display = "none";
+      }
+    })
+  </script>
+<%- include("Footer") -%>

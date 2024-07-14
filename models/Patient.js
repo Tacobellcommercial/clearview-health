@@ -10,6 +10,7 @@ const patientSchema = new mongoose.Schema({
   doctorsList: [],
   awaitingDoctors: [],
   prescriptionList: [],
+  labs: [],
   username: String,
   password: String,
   authority: String

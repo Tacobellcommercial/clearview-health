@@ -940,3 +940,57 @@ NOT IN USE NOT IN USE NOT IN USE
 .ph-prescription-object button{
   display: block;
 }
+
+
+/*DOCTOR LABS*/
+/*DOCTOR LABS*/
+/*DOCTOR LABS*/
+/*DOCTOR LABS*/
+/*DOCTOR LABS*/
+
+.dh-labs{
+  margin-top: 3rem;
+  width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dh-labs-form{
+  background-color: #4285F4;
+  border-radius: 5px;
+  padding: 2.5%;
+}
+
+.dh-labs-form h1{
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-weight: bolder;
+  font-size: 2.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.dh-labs-form h2{
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.85rem;
+}
+
+.dh-labs-form select{
+  outline: none;
+  border-radius: 5px;
+  padding: 1%;
+  font-family: "Montserrat", sans-serif;
+}
+
+.dh-labs-form .broader-lab{
+  display: inline-block;
+  margin-right: 1.5rem;
+}
+
+.dh-labs-form .specific-lab {
+}
+
+
+.dh-labs-form button{
+  display: block;
+}

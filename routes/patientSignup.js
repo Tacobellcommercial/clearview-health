@@ -18,6 +18,7 @@ router.post("/", (req, res)=>{
           doctorsList: [],
           awaitingDoctors: [],
           prescriptionList: [],
+          labs: [],
           username: req.body.username, /*email*/
           password: encryptedPassword,
           authority: "Patient"
