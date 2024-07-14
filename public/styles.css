@@ -375,12 +375,23 @@
 
 /*Log in*/
 
+.register{
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .form-login{
   width: 30rem;
 }
 
+.form-login h1{
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 1.25rem;
+  font-size: 2.5rem;
+}
+
 .form-login h2{
-  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .form-login input{
@@ -388,17 +399,57 @@
   border: none;
   outline: none;
   font-family: "Ubuntu", sans-serif;
-  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  border-radius: 5px;
+  padding: 1.5%;
 }
 
 .form-login button{
-  margin-top: 2.5rem;
   display: block;
 }
 
+@media (max-width: 1250px){
+  #doctor-form-login{
+    width: 23rem;
+  }
+}
+
+
+@media (max-width: 800px){
+
+  .form-login h1{
+    font-size: 1.8rem;
+    font-weight: bolder;
+  }
+
+  .form-login{
+    text-align: center;
+  }
+
+  .form-login button{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #patient-form-login{
+    width: 23rem;
+  }
+}
+
+@media (max-width: 500px){
+  #doctor-form-login{
+    width: 15rem;
+  }
+
+  #patient-form-login{
+    width: 15rem;
+  }
+}
+
+
 /* Sign Up*/
 
-#doctor-form-login, #patient-form-login, #introduction-register, #patient-form-register, #doctor-form-register{
+#doctor-form-login, #patient-form-login, .introduction-register, #patient-form-register, #doctor-form-register{
   background: linear-gradient(257deg, #57caff, #5787ff);
   background-size: 400% 400%;
 
@@ -419,13 +470,37 @@
 }
 
 
-#introduction-register{
+.introduction-register{
   width: 30rem;
 }
 
-#introduction-register button{
+.introduction-register h1{
+  font-family: "Ubuntu", sans-serif;
+  font-size: 2.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.introduction-register button{
   font-family: "Roboto Mono", sans-serif;
   padding: 2.5%;
+}
+
+@media (max-width: 1000px){
+  .introduction-register{
+    width: 18rem;
+    text-align: center;
+  }
+
+  .introduction-register h1{
+    font-size: 1.75rem;
+  }
+
+  .introduction-register button{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+  }
 }
 
 .submit-information{
@@ -433,6 +508,7 @@
 }
 
 /*PATIENT FORM */
+
 .form-register{
   width: 50rem;
 }
@@ -543,6 +619,7 @@ NOT IN USE NOT IN USE NOT IN USE
 }
 
 
+
 .doctor-bubble{
   margin-top: 3.5rem;
   border-radius: 5px;
@@ -562,11 +639,31 @@ NOT IN USE NOT IN USE NOT IN USE
   padding: 1%;
 }
 
+@media (max-width: 1000px){
+  .doctor-lookup{
+    width: 23rem;
+  }
+}
+
+@media (max-width: 530px){
+  .doctor-lookup{
+    width: 15rem;
+  }
+
+  .doctor-bubble h2{
+    font-size: 1.85rem;
+  }
+
+  .doctor-bubble p{
+    font-family: "Roboto Mono", sans-serif;
+  }
+}
+
 .doctor-profile{
   margin-left: auto;
   margin-right: auto;
   width: 30rem;
-  margin-top: 2.5rem;
+  margin-top: 3.5rem;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   padding-bottom: 0.5%;
 }
@@ -584,6 +681,31 @@ NOT IN USE NOT IN USE NOT IN USE
   font-family: "Roboto", sans-serif;
 }
 
+@media (max-width: 750px){
+  .doctor-profile{
+    width: 23rem;
+  }
+
+  .doctor-profile h1{
+    font-size: 1.85rem;
+  }
+
+  .doctor-profile p{
+    font-family: "Roboto", sans-serif;
+  }
+}
+
+@media (max-width: 400px){
+  .doctor-profile{
+    width: 18rem;
+    padding: 2.5%;
+  }
+
+  .doctor-profile h1{
+    font-size: 1.5rem;
+  }
+}
+
 
 /*DOCTOR HOME*/
 
@@ -592,6 +714,11 @@ NOT IN USE NOT IN USE NOT IN USE
   margin-left: auto;
   margin-right: auto;
   padding-top: 5%;
+}
+
+.doctor-home p{
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.15rem;
 }
 
 
@@ -607,13 +734,14 @@ NOT IN USE NOT IN USE NOT IN USE
   display: inline-table;
 }
 
-.dh-patient-object h2{
+.dh-patient-object .accept-deny h2{
   font-size: 1.5rem;
   font-family: "Roboto", sans-serif;
   font-weight: bolder;
+  margin-bottom: 0;
 }
 
-.dh-patient-object form{
+.dh-patient-object .accept-deny form{
   margin-top: 1rem;
   display: inline-block;
   position: relative;
@@ -623,7 +751,8 @@ NOT IN USE NOT IN USE NOT IN USE
 .dh-patient-object button{
   font-family: "Roboto", sans-serif;
   font-size: 0.85rem;
-  margin-right: 0.5rem;
+  display: block;
+  margin-bottom: 1rem;
 }
 
 
@@ -634,7 +763,12 @@ NOT IN USE NOT IN USE NOT IN USE
 
 .dh-patient-object .information p{
   font-family: "Roboto Mono", sans-serif;
+  font-size: 1rem;
+}
 
+
+.dh-patient-object h2{
+  margin-bottom: 1rem;
 }
 
 .dh-patient-object .interact{
@@ -650,7 +784,9 @@ NOT IN USE NOT IN USE NOT IN USE
   display: block;
   width: 35%;
   text-align: left;
-  margin-bottom: 1.5%;
+  position: relative;
+  margin-top: 1rem;
+  top: 1.5rem;
 }
 
 
@@ -729,6 +865,10 @@ NOT IN USE NOT IN USE NOT IN USE
   display: block;
 }
 
+#dh-prescription-added-by{
+  font-size: 0.85rem;
+}
+
 
 /* PATIENT HOME*/
 
@@ -737,6 +877,7 @@ NOT IN USE NOT IN USE NOT IN USE
   margin-right: auto;
   width: 50rem;
   margin-top: 2rem;
+  margin-bottom: 5%;
 }
 
 .patient-home p{
@@ -771,4 +912,31 @@ NOT IN USE NOT IN USE NOT IN USE
 .ph-doctor-object p{
   font-family: "Roboto Mono", sans-serif;
   font-size: 1rem;
+}
+
+.ph-prescription-object{
+  width: 100%;
+  padding: 2.5%;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  margin-bottom: 1%;
+  background-color: #4285F4;
+  border-radius: 5px;
+}
+
+.ph-prescription-object h2{
+  color: white;
+}
+
+.ph-prescription-object p{
+  display: inline-block;
+  padding: 1%;
+  background-color: white;
+  border-radius: 7px;
+  font-family: "Roboto Mono", sans-esrif;
+  margin-right: 2%;
+  font-size: 1rem;
+}
+
+.ph-prescription-object button{
+  display: block;
 }

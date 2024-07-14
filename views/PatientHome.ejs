@@ -25,8 +25,18 @@
   <%})%>
   <hr />
 
+  <h1>Prescriptions</h1>
   <div class="prescriptions">
-      <h1>Prescriptions</h1>
+    <%prescriptionList.forEach(prescriptionObject=>{%>
+      <div class="ph-prescription-object">
+          <h2><%=prescriptionObject.prescriptionName%></h2>
+          <p>AMT: <%=prescriptionObject.prescriptionAmount%> mg</p>
+          <p>TAKEN: <%=prescriptionObject.time%></p>
+          <p>Added by: <%=prescriptionObject.addedBy.lastName.toUpperCase()%>, <%=prescriptionObject.addedBy.firstName.toUpperCase()%></p>
+          <button type="button" class="btn btn-outline-light"><i class="fa-regular fa-calendar"></i> Add to Calendar</button>
+      </div>
+    <%})%>
+
   </div>
 
 </div>

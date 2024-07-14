@@ -1,7 +1,7 @@
 <%- include("Header") -%>
 
 <div class="register" method="post" action="/register">
-  <div id="introduction-register">
+  <div class="introduction-register">
     <p><%=errorMessage%></p>
     <h1>Are you <span style="text-decoration: underline">logging</span> in as...</h1>
     <button class="btn btn-danger" id="doctor-button-login"><i class="fa-solid fa-notes-medical"></i> A doctor</button>
@@ -29,7 +29,7 @@
 
 <script>
 
-  const introductionRegister = document.getElementById("introduction-register")
+  const introductionRegister = document.getElementsByClassName("introduction-register")
 
   const doctorButton = document.getElementById("doctor-button-login")
   const patientButton = document.getElementById("patient-button-login")
@@ -42,14 +42,14 @@
 
     doctorForm.style.display = "block";
     patientForm.style.display = "none";
-    introductionRegister.style.display = "none";
+    introductionRegister[0].style.display = "none";
   })
 
   patientButton.addEventListener("click", (event)=>{
     event.preventDefault();
     patientForm.style.display = "block";
     doctorForm.style.display = "none";
-    introductionRegister.style.display = "none";
+    introductionRegister[0].style.display = "none";
 
   })
 </script>

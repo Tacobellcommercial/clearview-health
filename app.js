@@ -123,6 +123,7 @@ app.get("/home", async (req, res)=>{
         lastName: req.user.lastName,
         doctorsList: patientObject.doctorsList,
         awaitingDoctors: patientObject.awaitingDoctors,
+        prescriptionList: patientObject.prescriptionList,
         doctor: false,
         patient: true
       });
@@ -189,7 +190,8 @@ app.post("/add-prescription", async (req, res)=>{
       let authorized = authorizedDoctor(doctorObject, req.body.patientId);
 
       if (authorized){
-        const prescriptionObject = {prescriptionName: req.body.prescriptionName, prescriptionAmount: req.body.prescriptionAmount, time: req.body.prescriptionTime, prescriptionId: String(Date.now())}
+        const prescriptionObject = {prescriptionName: req.body.prescriptionName, prescriptionAmount: req.body.prescriptionAmount, time: req.body.prescriptionTime, addedBy: {firstName: req.user.firstName, lastName: req.user.lastName}, prescriptionId: String(Date.now())}
+        console.log(prescriptionObject);
         await Patient.updateOne({_id: req.body.patientId}, {$push: {prescriptionList: prescriptionObject}})
         res.redirect("/prescriptions/" + req.body.patientId)
       }else{
@@ -227,7 +229,7 @@ app.post("/remove-prescription", async (req, res)=>{
 
 app.post("/doctor-remove-patient", async (req, res)=>{
   const doctorObject = await Doctor.findOne({_id: req.user.id});
-  const patientObject = await Patient.findOne({_id: req.body.id});
+  const patientObject = await Patient.findOne({_id: req.body.patientId});
 
   await Patient.updateOne({_id: patientObject._id}, {$pull: {doctorsList: {_id: doctorObject._id}}});
   await Doctor.updateOne({_id: doctorObject._id}, {$pull: {patientList: {_id: patientObject._id}}});
