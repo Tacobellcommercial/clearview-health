@@ -6,6 +6,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
+const multer = require("multer");
 
 const app = express();
 
@@ -147,6 +148,9 @@ function authorizedDoctor(doctorObject, stringPatientId){
 /*LABS*/
 /*LABS*/
 
+const storage = multer.memoryStorage();
+const upload = multer({storage: storage});
+
 app.get("/labs/:userId", async (req, res)=>{
   if (req.isAuthenticated()){
     if (req.user.authority == "Doctor"){
@@ -159,6 +163,9 @@ app.get("/labs/:userId", async (req, res)=>{
           title: "Labs | Clearview Health",
           labs: patientObject.labs,
           patientName: patientObject.firstName + " " + patientObject.lastName,
+          labList: patientObject.labs,
+          userId: patientObject._id,
+          doctorName: req.user.lastName.toUpperCase() + ", " + req.user.firstName.toUpperCase(),
           doctor: true,
           patient: false,
         })
@@ -172,6 +179,63 @@ app.get("/labs/:userId", async (req, res)=>{
     res.redirect("/register");
   }
 })
+
+app.post("/add-lab-results", upload.single("lab_file"), async (req, res)=>{
+  if (req.isAuthenticated()){
+    if (req.user.authority == "Doctor"){
+      const doctorObject = await Doctor.findOne({_id: req.user.id});
+      let authorized = authorizedDoctor(doctorObject, req.body.userId);
+      if (authorized){
+        const labFile = req.file;
+        let specificLabType = "";
+
+        if (req.body.bloodworkTest != ""){
+          specificLabType = req.body.bloodworkTest;
+        }else if (req.body.imagingType != ""){
+          specificLabType = req.body.imagingType;
+        }else if (req.body.otherTest != ""){
+          specificLabType = req.body.otherTest;
+        }
+
+        const labData = {
+          labType: req.body.labType,
+          specificLabType: specificLabType,
+          labFile: {
+            data: labFile.buffer,
+            contentType: labFile.mimetype,
+            originalName: labFile.originalname
+          },
+          id: String(Date.now()),
+        }
+        await Patient.updateOne({_id: req.body.userId}, {$push: {labs: labData}})
+        res.redirect("/labs/" + req.body.userId)
+      }else{
+        res.redirect("/home");
+      }
+
+    }else{
+      res.redirect("/home");
+    }
+  }else{
+    res.redirect("/register");
+  }
+
+})
+
+app.post("/remove-lab-result", async (req, res)=>{
+
+  if (req.isAuthenticated()){
+    if (req.user.authority == "Doctor"){
+      await Patient.updateOne({_id: req.body.userId}, {$pull: {labs: {id: req.body.labId}}})
+      res.redirect("/labs/" + req.body.userId);
+    }else{
+      res.redirect("/home");
+    }
+  }else{
+    res.redirect("/register");
+  }
+})
+
 
 /*PRESCRIPTIONS*/
 /*PRESCRIPTIONS*/

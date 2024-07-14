@@ -887,6 +887,7 @@ NOT IN USE NOT IN USE NOT IN USE
 
 .patient-home h1{
   margin-bottom: 1rem;
+  margin-top: 1.5rem;
 }
 
 #patient-your-doctors{
@@ -953,12 +954,14 @@ NOT IN USE NOT IN USE NOT IN USE
   width: 40rem;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 5%;
 }
 
 .dh-labs-form{
   background-color: #4285F4;
   border-radius: 5px;
   padding: 2.5%;
+  margin-bottom: 2.5rem;
 }
 
 .dh-labs-form h1{
@@ -993,4 +996,23 @@ NOT IN USE NOT IN USE NOT IN USE
 
 .dh-labs-form button{
   display: block;
+}
+
+
+.dh-labs p{
+  font-family: "Roboto Mono", sans-serif;
+}
+
+.dh-lab-object{
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  margin-bottom: 1rem;
+  padding: 2%;
+}
+
+.dh-lab-object img{
+  width: 100%;
+}
+
+.dh-lab-object button{
+  margin-top: 1rem;
 }

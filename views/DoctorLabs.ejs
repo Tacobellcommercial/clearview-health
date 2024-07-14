@@ -1,6 +1,6 @@
 <%- include("Header") -%>
   <div class="dh-labs">
-    <form method="post" action="/add-lab-results" class="dh-labs-form">
+    <form method="post" action="/add-lab-results" class="dh-labs-form" enctype="multipart/form-data">
       <h1>Add lab results</h1>
 
       <div class="broader-lab">
@@ -18,8 +18,8 @@
         <h2>Bloodwork Details</h2>
         <select id="bloodwork-test" name="bloodworkTest">
           <option value="">Select Test</option>
-          <option value="cbc">Complete Blood Count (CBC)</option>
-          <option value="cmp">Comprehensive Metabolic Panel (CMP)</option>
+          <option value="Complete Blood Count (CBC)">Complete Blood Count (CBC)</option>
+          <option value="Comprehensive Metabolic Panel (CMP)">Comprehensive Metabolic Panel (CMP)</option>
         </select>
       </div>
 
@@ -27,40 +27,73 @@
         <h2>Imaging Details</h2>
         <select id="imaging-type" name="imagingType">
           <option value="">Select Type</option>
-          <option value="xray">X-ray</option>
-          <option value="ct">CT Scan</option>
-          <option value="mri">MRI</option>
-          <option value="ultrasound">Ultrasound</option>
+          <option value="X-ray">X-ray</option>
+          <option value="CT Scan">CT Scan</option>
+          <option value="MRI Scan">MRI</option>
+          <option value="Ultrasound">Ultrasound</option>
         </select>
+      </div>
+
+      <div class="specific-lab" id="other" style="display: none">
+        <h2>Other</h2>
+        <input id="otherTestInput" name="otherTest" type="text" placeholder="Enter lab topic here..." />
       </div>
 
       <hr />
       <input type="file" id="lab_file" name="lab_file"/>
       <button type="submit" class="btn btn-outline-light">Add Lab Result</button>
+      <input type="hidden" value="<%=userId%>" name="userId"/>
+
     </form>
     <h1>Labs for <%=patientName%></h1>
+    <%if (labList.length == 0){%>
+        <p>No labs yet...</p>
+    <%}%>
+    <%labList.forEach(e=>{%>
+        <div class="dh-lab-object">
+            <h2>Type: <%=e.labType.toUpperCase()%></h2>
+            <p>Specific: <%=e.specificLabType%></p>
+            <p>Ordered by: <%=doctorName%></p>
+            <img src="data:<%= e.labFile.contentType %>;base64,<%= e.labFile.data.toString('base64') %>" alt="lab-report-image" />
+            <form action="/remove-lab-result" method="post">
+              <input type="hidden" value="<%=userId%>" name="userId"/>
+              <input type="hidden" value="<%=e.id%>" name="labId"/>
+              <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash-can"></i> Remove</button>
+            </form>
+        </div>
+    <%})%>
   </div>
 
   <script>
     const labTypeSelect = document.getElementById("lab-type");
     const bloodworkDetails = document.getElementById("bloodwork-details");
     const imagingDetails = document.getElementById("imaging-details");
+    const otherDetails = document.getElementById("other");
 
     labTypeSelect.addEventListener("change", ()=>{
       const selectedType = labTypeSelect.value;
 
+      document.getElementById("bloodwork-test").value = "";
+      document.getElementById("imaging-type").value = "";
+      document.getElementById("otherTestInput").value = "";
+
       if (selectedType == "bloodwork"){
         bloodworkDetails.style.display = "inline-block";
         imagingDetails.style.display = "none";
+        otherTest.style.display = "none";
       }else if (selectedType == "imaging"){
         imagingDetails.style.display = "inline-block";
         bloodworkDetails.style.display = "none";
+        otherDetails.style.display = "none";
       }else if (selectedType == "other"){
-        /*make text field visible*/
+        otherDetails.style.display = "inline-block";
+        bloodworkDetails.style.display = "none";
+        imagingDetails.style.display = "none";
       }else if (selectedType == ""){
-        console.log("HELLO?");
         imagingDetails.style.display = "none";
         bloodworkDetails.style.display = "none";
+        otherDetails.style.display = "none";
+
       }
     })
   </script>
