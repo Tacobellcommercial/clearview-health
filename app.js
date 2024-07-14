@@ -125,6 +125,7 @@ app.get("/home", async (req, res)=>{
         doctorsList: patientObject.doctorsList,
         awaitingDoctors: patientObject.awaitingDoctors,
         prescriptionList: patientObject.prescriptionList,
+        labList: patientObject.labs,
         doctor: false,
         patient: true
       });
@@ -165,7 +166,6 @@ app.get("/labs/:userId", async (req, res)=>{
           patientName: patientObject.firstName + " " + patientObject.lastName,
           labList: patientObject.labs,
           userId: patientObject._id,
-          doctorName: req.user.lastName.toUpperCase() + ", " + req.user.firstName.toUpperCase(),
           doctor: true,
           patient: false,
         })
@@ -197,6 +197,13 @@ app.post("/add-lab-results", upload.single("lab_file"), async (req, res)=>{
           specificLabType = req.body.otherTest;
         }
 
+        function formatted_date(){
+          let date_result = "";
+          let d = new Date();
+          date_result += d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate()
+          return date_result;
+        }
+
         const labData = {
           labType: req.body.labType,
           specificLabType: specificLabType,
@@ -205,6 +212,8 @@ app.post("/add-lab-results", upload.single("lab_file"), async (req, res)=>{
             contentType: labFile.mimetype,
             originalName: labFile.originalname
           },
+          doctorName: req.user.lastName.toUpperCase() + ", " + req.user.firstName.toUpperCase(),
+          datePosted: formatted_date(),
           id: String(Date.now()),
         }
         await Patient.updateOne({_id: req.body.userId}, {$push: {labs: labData}})

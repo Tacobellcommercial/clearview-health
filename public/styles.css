@@ -898,11 +898,23 @@ NOT IN USE NOT IN USE NOT IN USE
   width: 100%;
   border-radius: 5px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  overflow-x: hidden;
+  margin-bottom: 2.5%;
 }
 .ph-doctor-object h2{
   font-family: "Roboto", sans-serif;
-  width: 30%;
+  width: 40%;
   display: inline-table;
+}
+
+.ph-doctor-object .awaiting-acceptance{
+  display: inline-table;
+  width: 40%;
+}
+
+
+.ph-doctor-object .awaiting-acceptance h2{
+  width: 90%;
 }
 
 .ph-doctor-object .information{

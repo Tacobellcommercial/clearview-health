@@ -8,6 +8,20 @@
   <%if (awaitingDoctors.length == 0){%>
       <p>No doctors requested...</p>
   <%}%>
+  <%awaitingDoctors.forEach(doctorObject=>{%>
+    <div class="ph-doctor-object">
+      <div class="awaiting-acceptance">
+        <h2><%=doctorObject.firstName%> <%=doctorObject.lastName%></h2>
+        <p style="color: blue;">Awaiting Acceptance...</p>
+      </div>
+
+      <div class="information">
+        <p><%=doctorObject.practiceName%></p>
+        <p><i class="fa-solid fa-phone"></i>: <%=doctorObject.phoneNumber%></p>
+        <p>ID: <%=doctorObject._id%></p>
+      </div>
+    </div>
+  <%})%>
   <hr />
   <h1 id="patient-your-doctors">Your doctors</h1>
   <%if (doctorsList.length == 0){%>
@@ -40,7 +54,20 @@
   </div>
 
   <h1>Lab Results</h1>
-  
+  <%if (labList.length == 0){ %>
+      <p>No results found yet...</p>
+  <%}%>
+
+  <%labList.forEach(e=>{%>
+      <div class="dh-lab-object">
+          <h2>Type: <%=e.labType.toUpperCase()%></h2>
+          <p>Specific: <%=e.specificLabType%></p>
+          <p>Ordered by: <%=e.doctorName%></p>
+          <p>DATE POSTED: <%=e.datePosted%></p>
+          <img src="data:<%= e.labFile.contentType %>;base64,<%= e.labFile.data.toString('base64') %>" alt="lab-report-image" />
+
+      </div>
+  <%})%>
 
 </div>
 

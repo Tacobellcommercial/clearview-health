@@ -53,7 +53,9 @@
         <div class="dh-lab-object">
             <h2>Type: <%=e.labType.toUpperCase()%></h2>
             <p>Specific: <%=e.specificLabType%></p>
-            <p>Ordered by: <%=doctorName%></p>
+            <p>Ordered by: <%=e.doctorName%></p>
+            <p>DATE POSTED: <%=e.datePosted%></p>
+
             <img src="data:<%= e.labFile.contentType %>;base64,<%= e.labFile.data.toString('base64') %>" alt="lab-report-image" />
             <form action="/remove-lab-result" method="post">
               <input type="hidden" value="<%=userId%>" name="userId"/>
