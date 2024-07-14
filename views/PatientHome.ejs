@@ -40,6 +40,9 @@
   <hr />
 
   <h1>Prescriptions</h1>
+  <%if (prescriptionList.length == 0){%>
+      <p>No prescriptions found...</p>
+  <%}%>
   <div class="prescriptions">
     <%prescriptionList.forEach(prescriptionObject=>{%>
       <div class="ph-prescription-object">

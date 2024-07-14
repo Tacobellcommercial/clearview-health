@@ -138,7 +138,7 @@ app.get("/home", async (req, res)=>{
 function authorizedDoctor(doctorObject, stringPatientId){
   let authorized = false;
   doctorObject.patientList.forEach(patient=>{
-    if (patient._id.equals(mongoose.Types.ObjectId(stringPatientId))){
+    if (patient._id.equals(new mongoose.Types.ObjectId(stringPatientId))){
       authorized = true;
     }
   })
@@ -328,13 +328,16 @@ app.post("/doctor-remove-patient", async (req, res)=>{
 
   await Patient.updateOne({_id: patientObject._id}, {$pull: {doctorsList: {_id: doctorObject._id}}});
   await Doctor.updateOne({_id: doctorObject._id}, {$pull: {patientList: {_id: patientObject._id}}});
+  res.redirect("/home");
+
 })
 
 app.post("/doctor-accept-patient", async (req, res)=>{
   const doctorObject = await Doctor.findOne({_id: req.user.id})
   const patientObject = await Patient.findOne({_id: req.body.id});
 
-  await Patient.updateOne({_id: req.body.id}, {$pull: {awaitingDoctors: {_id: mongoose.Types.ObjectId(req.user.id)}}});
+  /*mongoose.Types.ObjectId(req.user.id)*/
+  await Patient.updateOne({_id: req.body.id}, {$pull: {awaitingDoctors: {_id: new mongoose.Types.ObjectId(req.user.id)}}});
   await Patient.updateOne({_id: req.body.id}, {$push: {doctorsList: doctorObject}});
 
   await Doctor.updateOne({_id: req.user.id}, {$pull: {awaitingPatients: {id: req.body.id}}});
@@ -342,12 +345,11 @@ app.post("/doctor-accept-patient", async (req, res)=>{
   res.redirect("/home");
 })
 
-app.post("/doctor-reject-patient", (req, res)=>{
-  Doctor.updateOne({_id: req.user.id}, {$pull: {awaitingPatients: {id: req.body.id}}}, (err, result)=>{
-    Patient.updateOne({_id: req.body.id}, {$pull: {awaitingDoctors: {_id: mongoose.Types.ObjectId(req.user.id)}}}, (err2, result2)=>{
-      res.redirect("/home");
-    })
-  })
+app.post("/doctor-reject-patient", async (req, res)=>{
+
+  await Doctor.updateOne({_id: req.user.id}, {$pull: {awaitingPatients: {id: req.body.id}}});
+  await Patient.updateOne({_id: req.body.id}, {$pull: {awaitingDoctors: {_id: new mongoose.Types.ObjectId(req.user.id)}}});
+  res.redirect("/home");
 })
 
 
