@@ -1,5 +1,9 @@
 /*NAVBAR*/
 
+body{
+  overflow-x: hidden;
+}
+
 .navbar-brand i{
   font-size: 3.5rem;
   transition: 0.25s color;
@@ -723,10 +727,12 @@ NOT IN USE NOT IN USE NOT IN USE
 
 
 .dh-patient-object{
+  overflow-x: hidden;
   width: 100%;
   border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 }
+
 
 .dh-patient-object .accept-deny{
   width: 60%;
@@ -782,11 +788,50 @@ NOT IN USE NOT IN USE NOT IN USE
   font-family: "Roboto", sans-serif;
   text-decoration: none;
   display: block;
-  width: 35%;
   text-align: left;
-  position: relative;
-  margin-top: 1rem;
-  top: 1.5rem;
+  max-width: 50%;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 1350px){
+  .doctor-home{
+    width: 40rem;
+  }
+}
+
+@media (max-width: 1000px){
+  .doctor-home{
+    width: 35rem;
+  }
+}
+
+@media (max-width: 750px){
+  .doctor-home{
+    width:  90%;
+  }
+
+  .dh-patient-object h2{
+    font-size: 1.5rem;
+  }
+
+  .dh-patient-object .interact{
+    width: 50%;
+  }
+
+  .dh-patient-object .interact a{
+    max-width: 90%;
+    font-size: 0.85rem;
+  }
+
+  .dh-patient-object .information p{
+    font-family: "Roboto Mono", sans-serif;
+    font-size: 0.85rem;
+  }
+
+  .dh-patient-object .information{
+    width: 40%;
+    display: inline-table;
+  }
 }
 
 
@@ -797,6 +842,7 @@ NOT IN USE NOT IN USE NOT IN USE
   margin-left: auto;
   margin-right: auto;
   margin-top: 2.5rem;
+  overflow-x: hidden;
 }
 
 .add-prescription{
@@ -822,6 +868,7 @@ NOT IN USE NOT IN USE NOT IN USE
   width: 50%;
   font-size: 1.25rem;
   font-family: "Ubuntu", sans-serif;
+  margin-bottom: 1rem;
 }
 
 .add-prescription #prescription-amount{
@@ -849,6 +896,7 @@ NOT IN USE NOT IN USE NOT IN USE
   padding: 1%;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   margin-bottom: 1%;
+  overflow-x: hidden;
 }
 
 .dh-prescription-object h2{
@@ -869,6 +917,35 @@ NOT IN USE NOT IN USE NOT IN USE
   font-size: 0.85rem;
 }
 
+@media (max-widtH: 1180px){
+  .dh-prescriptions{
+    width: 40rem;
+  }
+}
+
+@media (max-width: 800px){
+  .dh-prescriptions{
+    width: 30rem;
+  }
+}
+
+@media (max-width: 645px){
+  .dh-prescriptions{
+    width: 90%;
+  }
+}
+
+@media (max-width: 550px){
+  .add-prescription #prescription-amount{
+    width: 25%;
+  }
+
+  .add-prescription select{
+    width: 75%;  
+  }
+}
+
+
 
 /* PATIENT HOME*/
 
@@ -879,6 +956,8 @@ NOT IN USE NOT IN USE NOT IN USE
   margin-top: 2rem;
   margin-bottom: 5%;
 }
+
+
 
 .patient-home p{
   font-family: "Ubuntu", sans-serif;
@@ -954,6 +1033,53 @@ NOT IN USE NOT IN USE NOT IN USE
   display: block;
 }
 
+@media(max-width: 1180px){
+  .patient-home{
+    width: 40rem;
+  }
+}
+
+
+@media (max-width: 800px){
+  .patient-home{
+    width: 30rem;
+  }
+
+  .ph-doctor-object{
+    padding: 1%;
+  }
+
+  .ph-doctor-object h2{
+    width: 100%;
+  }
+
+  .ph-doctor-object .awaiting-acceptance{
+    display: block;
+    width: 100%;
+  }
+
+  .ph-doctor-object .awaiting-acceptance h2{
+    width: 100%;
+    display: inline-block;
+    overflow-x: hidden;
+  }
+
+  .ph-doctor-object .information{
+    display: block;
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 645px){
+
+  .patient-home{
+    width: 90%;
+  }
+
+}
+
+
 
 /*DOCTOR LABS*/
 /*DOCTOR LABS*/
@@ -967,6 +1093,7 @@ NOT IN USE NOT IN USE NOT IN USE
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 5%;
+  overflow-x: hidden;
 }
 
 .dh-labs-form{
@@ -1019,6 +1146,7 @@ NOT IN USE NOT IN USE NOT IN USE
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   margin-bottom: 1rem;
   padding: 2%;
+  overflow-x: hidden;
 }
 
 .dh-lab-object img{
@@ -1027,4 +1155,24 @@ NOT IN USE NOT IN USE NOT IN USE
 
 .dh-lab-object button{
   margin-top: 1rem;
+}
+
+@media (max-width: 1180px){
+  .dh-labs{
+    width: 30rem;
+  }
+}
+
+@media(max-width: 800px){
+  .dh-labs{
+    width: 25rem;
+  }
+
+}
+
+
+@media (max-width: 645px){
+  .dh-labs{
+    width: 90%;
+  }
 }

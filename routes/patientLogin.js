@@ -10,7 +10,9 @@ router.post("/", (req, res, next) => {
       res.render("Login", {
         title: "Login | Clearview Health",
         errorMessage: "Wrong username/password...",
-        successMessage: ""
+        successMessage: "",
+        doctor: false,
+        patient: false,
       })
     }else{
       req.logIn(user, (err)=>{

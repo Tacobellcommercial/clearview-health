@@ -53,7 +53,6 @@
                 <p><%=e.biologicalSex%></p>
                 <p><%=calculateAge(e.dateOfBirth)%> Years Old</p>
                 <p><i class="fa-solid fa-phone"></i>: <%=e.phoneNumber%></p>
-
                 <form method="post" action="/doctor-remove-patient">
                   <input type="hidden" name="patientId" value="<%=e._id%>"/>
                   <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i> Remove</button>
