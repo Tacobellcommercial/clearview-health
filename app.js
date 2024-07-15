@@ -109,7 +109,9 @@ app.get("/about", (req, res)=>{
     })
   }else{
     res.render("About", {
-
+      title: "About | Clearview Health",
+      patient: false,
+      doctor: false,
     })
   }
 })
