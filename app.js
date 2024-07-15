@@ -7,10 +7,14 @@ const LocalStrategy = require("passport-local");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const multer = require("multer");
+const MongoStore = require("connect-mongo");
 
 const app = express();
 
-mongoose.connect("mongodb+srv://tacobellcommercial:"+process.env.PASSWORD+"@cluster0.0zda3uf.mongodb.net/")
+mongoose.connect("mongodb+srv://tacobellcommercial:" + process.env.PASSWORD + "@cluster0.0zda3uf.mongodb.net/", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 const Patient = require("./models/Patient")
 const Doctor = require("./models/Doctor")
@@ -35,9 +39,15 @@ app.use(express.static("public"));
 
 app.use(session({
   secret: "secret",
-  resave: true,
-  saveUninitialized: true
-}))
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: "mongodb+srv://tacobellcommercial:" + process.env.PASSWORD + "@cluster0.0zda3uf.mongodb.net/"
+  }),
+  cookie: {
+    maxAge: 14*24*60*60*1000
+  }
+}));
 
 app.use(passport.authenticate("session"));
 
@@ -89,6 +99,20 @@ app.use("/doctor-login", doctorLoginRouter); /*POST */
 
 
 app.use("/", landingPageRouter); /*GET*/
+
+app.get("/about", (req, res)=>{
+  if (req.isAuthenticated()){
+    res.render("About", {
+      title: "About | Clearview Health",
+      patient: req.user.authority == "Patient",
+      doctor: req.user.authority == "Doctor"
+    })
+  }else{
+    res.render("About", {
+
+    })
+  }
+})
 
 app.get("/home", async (req, res)=>{
   if (req.isAuthenticated()){

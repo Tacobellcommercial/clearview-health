@@ -393,6 +393,25 @@ body{
   font-family: "Montserrat", sans-serif;
 }
 
+.about{
+  text-align: center;
+}
+
+.about h1{
+  font-family: "Montserrat", sans-serif;
+  font-weight: bolder;
+  margin-top: 2.5rem;
+}
+
+.about p{
+  font-family: "Roboto Mono", sans-serif;
+}
+
+.about h2{
+  font-family: "Roboto", sans-serif;
+  font-weight: bolder;
+}
+
 /*Log in*/
 
 .register{
