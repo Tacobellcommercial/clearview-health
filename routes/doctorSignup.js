@@ -45,9 +45,9 @@ router.post("/", (req, res)=>{
           authority: "Doctor"
         })
 
-        newDoctor.save((err, result)=>{
-          res.redirect("/login");
-        })
+        await newDoctor.save();
+
+        res.redirect("/login");
       })
     }else{
       res.render("Register", {
