@@ -50,7 +50,7 @@
           <p>AMT: <%=prescriptionObject.prescriptionAmount%> mg</p>
           <p>TAKEN: <%=prescriptionObject.time%></p>
           <p>Added by: <%=prescriptionObject.addedBy.lastName.toUpperCase()%>, <%=prescriptionObject.addedBy.firstName.toUpperCase()%></p>
-          <button type="button" class="btn btn-outline-light"><i class="fa-regular fa-calendar"></i> Add to Calendar</button>
+          <h3>Date posted: <%=prescriptionObject.date%></h3>
       </div>
     <%})%>
 

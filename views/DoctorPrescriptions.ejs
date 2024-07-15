@@ -31,6 +31,7 @@
             <p>Amount: <%=prescriptionObject.prescriptionAmount%> mg</p>
             <p>Period: <%=prescriptionObject.time%></p>
             <p id="dh-prescription-added-by">Added by: <%=prescriptionObject.addedBy.lastName.toUpperCase()%>, <%=prescriptionObject.addedBy.firstName.toUpperCase()%></p>
+            <p>Date posted: <%=prescriptionObject.date%></p>
             <form action="/remove-prescription" method="post">
               <input type="hidden" name="prescriptionId" value="<%=prescriptionObject.prescriptionId%>" />
               <input type="hidden" name="patientId" value="<%=patientId%>"/>

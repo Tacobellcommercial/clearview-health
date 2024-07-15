@@ -285,7 +285,13 @@ app.post("/add-prescription", async (req, res)=>{
       let authorized = authorizedDoctor(doctorObject, req.body.patientId);
 
       if (authorized){
-        const prescriptionObject = {prescriptionName: req.body.prescriptionName, prescriptionAmount: req.body.prescriptionAmount, time: req.body.prescriptionTime, addedBy: {firstName: req.user.firstName, lastName: req.user.lastName}, prescriptionId: String(Date.now())}
+        function formatted_date(){
+          let date_result = "";
+          let d = new Date();
+          date_result += d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate()
+          return date_result;
+        }
+        const prescriptionObject = {prescriptionName: req.body.prescriptionName, prescriptionAmount: req.body.prescriptionAmount, time: req.body.prescriptionTime, addedBy: {firstName: req.user.firstName, lastName: req.user.lastName}, prescriptionId: String(Date.now()), date: formatted_date()}
         console.log(prescriptionObject);
         await Patient.updateOne({_id: req.body.patientId}, {$push: {prescriptionList: prescriptionObject}})
         res.redirect("/prescriptions/" + req.body.patientId)

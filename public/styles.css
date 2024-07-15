@@ -1049,6 +1049,12 @@ NOT IN USE NOT IN USE NOT IN USE
   display: block;
 }
 
+.ph-prescription-object h3{
+  font-family: "Roboto Mono", sans-serif;
+  color: white;
+  font-size: 1rem;
+}
+
 @media(max-width: 1180px){
   .patient-home{
     width: 40rem;
