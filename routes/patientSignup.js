@@ -48,9 +48,10 @@ router.post("/", async (req, res)=>{
           authority: "Patient"
         })
 
-        await newPatient.save();
+        newPatient.save().then(savedDoc=>{
+          res.redirect("/login");
+        })
 
-        res.redirect("/login");
       })
     }else{
       res.render("Register", {

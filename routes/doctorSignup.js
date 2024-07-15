@@ -44,10 +44,9 @@ router.post("/", async (req, res)=>{
           password: encryptedPassword,
           authority: "Doctor"
         })
-
-        await newDoctor.save();
-
-        res.redirect("/login");
+        newDoctor.save().then(savedDoc=>{
+          res.redirect("/login");
+        })
       })
     }else{
       res.render("Register", {
