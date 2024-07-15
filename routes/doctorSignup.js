@@ -4,8 +4,8 @@ const router = express.Router();
 
 const Doctor = require("../models/Doctor.js");
 
-router.post("/", (req, res)=>{
-  const arrayOfDocuments = Doctor.find({"username": req.body.username});
+router.post("/", async (req, res)=>{
+  const arrayOfDocuments = await Doctor.find({"username": req.body.username});
 
   let fieldMissing = false;
   let passwordTooShort = false;
