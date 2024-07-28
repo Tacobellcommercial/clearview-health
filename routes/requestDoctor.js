@@ -21,7 +21,7 @@ router.post("/", async (req, res)=>{
       })
 
       doctorObject.patientList.forEach(element=>{
-        if (element._id.equals(new mongoose.Types.ObjectId(req.user.id))){ /*DO NOT PUSH YET: change = new*/
+        if (element._id.equals(new mongoose.Types.ObjectId(req.user.id))){
           doctorAlreadyAccepted = true
         }
       })
